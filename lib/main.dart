@@ -53,6 +53,10 @@ class HomeScreen extends StatelessWidget {
     Navigator.pushNamed(context, '/collections');
   }
 
+  void navigateToCart(BuildContext context) {
+    Navigator.pushNamed(context, '/cart');
+  }
+
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
   }
@@ -150,7 +154,7 @@ class HomeScreen extends StatelessWidget {
                                     minWidth: 32,
                                     minHeight: 32,
                                   ),
-                                  onPressed: placeholderCallbackForButtons,
+                                  onPressed: () => navigateToCart(context),
                                 ),
                                 IconButton(
                                   icon: const Icon(

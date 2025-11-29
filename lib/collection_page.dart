@@ -8,7 +8,7 @@ class CollectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final products = ProductService.getProductsForCollection(collectionName);
+  final products = ProductService.instance.getProductsForCollection(collectionName);
 
     return Scaffold(
       appBar: AppBar(
@@ -30,8 +30,8 @@ class CollectionPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final p = products[index];
                   return ListTile(
-                    title: Text(p.title),
-                    trailing: Text('£${p.price.toStringAsFixed(2)}'),
+                title: Text(p.title),
+                trailing: Text(p.price),
                   );
                 },
               ),

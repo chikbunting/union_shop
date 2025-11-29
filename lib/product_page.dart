@@ -1,18 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/services/cart_service.dart';
+import 'package:union_shop/models/product.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  String _selectedSize = 'One Size';
+  String _selectedColour = 'Black';
+  int _quantity = 1;
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
   void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
+    // placeholder
+  }
+
+  void _addToCart() {
+    // Use a placeholder Product for demo purposes
+    final product = Product(
+      id: 'p-demo',
+      title: 'Placeholder Product Name',
+      price: '£15.00',
+      description: 'Demo product',
+      collection: 'Demo',
+      imageUrl: '',
+    );
+    CartService.instance.add(product, quantity: _quantity, size: _selectedSize, colour: _selectedColour);
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to cart')));
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -40,11 +66,11 @@ class ProductPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Row(
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
-                            },
-                            child: Image.network(
+                                  GestureDetector(
+                                    onTap: () {
+                                      navigateToHome(context);
+                                    },
+                                    child: Image.network(
                               'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                               height: 18,
                               fit: BoxFit.cover,
@@ -104,7 +130,7 @@ class ProductPage extends StatelessWidget {
                                     minWidth: 32,
                                     minHeight: 32,
                                   ),
-                                  onPressed: placeholderCallbackForButtons,
+                                  onPressed: () => Navigator.pushNamed(context, '/cart'),
                                 ),
                                 IconButton(
                                   icon: const Icon(
@@ -232,26 +258,26 @@ class ProductPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: DropdownButtonFormField<String>(
-                          value: 'One Size',
+                          value: _selectedSize,
                           items: const [
                             DropdownMenuItem(value: 'One Size', child: Text('One Size')),
                             DropdownMenuItem(value: 'Small', child: Text('Small')),
                             DropdownMenuItem(value: 'Medium', child: Text('Medium')),
                             DropdownMenuItem(value: 'Large', child: Text('Large')),
                           ],
-                          onChanged: (v) {},
+                          onChanged: (v) => setState(() => _selectedSize = v ?? 'One Size'),
                           decoration: const InputDecoration(labelText: 'Size'),
                         ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: DropdownButtonFormField<String>(
-                          value: 'Black',
+                          value: _selectedColour,
                           items: const [
                             DropdownMenuItem(value: 'Black', child: Text('Black')),
                             DropdownMenuItem(value: 'White', child: Text('White')),
                           ],
-                          onChanged: (v) {},
+                          onChanged: (v) => setState(() => _selectedColour = v ?? 'Black'),
                           decoration: const InputDecoration(labelText: 'Colour'),
                         ),
                       ),
@@ -263,10 +289,18 @@ class ProductPage extends StatelessWidget {
                       const Text('Quantity:'),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: TextFormField(
-                          initialValue: '1',
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(),
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.remove),
+                              onPressed: () => setState(() { if (_quantity > 1) _quantity -= 1; }),
+                            ),
+                            Text('$_quantity'),
+                            IconButton(
+                              icon: const Icon(Icons.add),
+                              onPressed: () => setState(() => _quantity += 1),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -275,10 +309,7 @@ class ProductPage extends StatelessWidget {
                   Row(
                     children: [
                       ElevatedButton(
-                        onPressed: () {
-                          // Add to cart demo behavior
-                          // We keep this minimal and use CartService directly
-                        },
+                        onPressed: _addToCart,
                         child: const Text('Add to Cart'),
                       ),
                       const SizedBox(width: 12),

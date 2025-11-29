@@ -7,7 +7,7 @@ class CollectionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final collections = ProductService.getCollections();
+  final collections = ProductService.instance.getCollections();
 
     return Scaffold(
       appBar: AppBar(
