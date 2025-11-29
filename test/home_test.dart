@@ -9,12 +9,9 @@ void main() {
       await tester.pump();
 
       // Check that basic UI elements are present
-      expect(
-        find.text('PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!'),
-        findsOneWidget,
-      );
+      expect(find.text('Union Shop — Official Student Union Store'), findsOneWidget);
       expect(find.text('Placeholder Hero Title'), findsOneWidget);
-      expect(find.text('PLACEHOLDER PRODUCTS SECTION'), findsOneWidget);
+      expect(find.text('Featured products'), findsOneWidget);
       expect(find.text('BROWSE PRODUCTS'), findsOneWidget);
       expect(find.text('VIEW ALL PRODUCTS'), findsOneWidget);
     });
@@ -40,10 +37,10 @@ void main() {
       await tester.pumpWidget(const UnionShopApp());
       await tester.pump();
 
-      // Check that header icons are present
-      expect(find.byIcon(Icons.search), findsOneWidget);
-      expect(find.byIcon(Icons.shopping_bag_outlined), findsOneWidget);
-      expect(find.byIcon(Icons.menu), findsOneWidget);
+  // Check that header icons are present
+  expect(find.byIcon(Icons.search), findsOneWidget);
+  expect(find.byIcon(Icons.shopping_bag_outlined), findsOneWidget);
+  expect(find.byIcon(Icons.person_outline), findsOneWidget);
     });
 
     testWidgets('should display footer', (tester) async {
@@ -51,11 +48,8 @@ void main() {
       await tester.pump();
 
       // Check that footer is present
-      expect(find.text('Placeholder Footer'), findsOneWidget);
-      expect(
-        find.text('Students should customise this footer section'),
-        findsOneWidget,
-      );
+      expect(find.text('Union Shop'), findsOneWidget);
+      expect(find.text('Official student union store. Find merch, gifts and stationery.'), findsOneWidget);
     });
   });
 }
