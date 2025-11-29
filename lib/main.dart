@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     color: const Color(0xFF4d2963),
                     child: const Text(
-                      'PLACEHOLDER HEADER TEXT',
+                      'PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
@@ -166,23 +166,19 @@ class HomeScreen extends StatelessWidget {
               width: double.infinity,
               child: Stack(
                 children: [
-                  // Background image
+                  // Background image as a widget so we can provide an errorBuilder
                   Positioned.fill(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
-                        ),
-                      ),
+                    child: Image.network(
+                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(color: Colors.grey[300]);
+                      },
                     ),
+                  ),
+                  // dark overlay
+                  Positioned.fill(
+                    child: Container(color: Colors.black.withOpacity(0.7)),
                   ),
                   // Content overlay
                   Positioned(
@@ -226,6 +222,11 @@ class HomeScreen extends StatelessWidget {
                             style: TextStyle(fontSize: 14, letterSpacing: 1),
                           ),
                         ),
+                        const SizedBox(height: 8),
+                        TextButton(
+                          onPressed: placeholderCallbackForButtons,
+                          child: const Text('VIEW ALL PRODUCTS'),
+                        ),
                       ],
                     ),
                   ),
@@ -241,7 +242,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'PRODUCTS SECTION',
+                      'PLACEHOLDER PRODUCTS SECTION',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.black,
@@ -293,13 +294,23 @@ class HomeScreen extends StatelessWidget {
               width: double.infinity,
               color: Colors.grey[50],
               padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Placeholder Footer',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    'Placeholder Footer',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Students should customise this footer section',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ],
               ),
             ),
           ],
