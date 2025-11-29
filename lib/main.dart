@@ -67,113 +67,90 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header
+            // Header (refined to mirror a simple nav layout similar to the reference site)
             Container(
-              height: 100,
               color: Colors.white,
               child: Column(
                 children: [
-                  // Top banner
+                  // Top banner (accent)
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 6),
                     color: const Color(0xFF4d2963),
                     child: const Text(
-                      'PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!',
+                      'Union Shop — Official Student Union Store',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                   ),
-                  // Main header
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
-                            },
-                            child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                              height: 18,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey[300],
-                                  width: 18,
-                                  height: 18,
-                                  child: const Center(
-                                    child: Icon(Icons.image_not_supported,
-                                        color: Colors.grey),
-                                  ),
-                                );
-                              },
-                            ),
+                  // Main header row
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    child: Row(
+                      children: [
+                        // Logo
+                        GestureDetector(
+                          onTap: () => navigateToHome(context),
+                          child: Row(
+                            children: [
+                              Image.network(
+                                'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                                height: 42,
+                                width: 42,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    color: Colors.grey[300],
+                                    width: 42,
+                                    height: 42,
+                                    child: const Center(
+                                      child: Icon(Icons.image_not_supported,
+                                          color: Colors.grey),
+                                    ),
+                                  );
+                                },
+                              ),
+                              const SizedBox(width: 12),
+                              const Text('Union Shop', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                            ],
                           ),
-                          const Spacer(),
-                          ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 600),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.person_outline,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: () => navigateToCart(context),
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                              ],
-                            ),
+                        ),
+
+                        const Spacer(),
+
+                        // Center nav links (hidden on narrow screens via ConstrainedBox)
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width > 800 ? 500 : 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(onPressed: () => navigateToCollections(context), child: const Text('Collections')),
+                              TextButton(onPressed: () => Navigator.pushNamed(context, '/sale'), child: const Text('Sale')),
+                              TextButton(onPressed: () => Navigator.pushNamed(context, '/about'), child: const Text('About')),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+
+                        const Spacer(),
+
+                        // Right icons
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.search, size: 20, color: Colors.grey),
+                              onPressed: placeholderCallbackForButtons,
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.person_outline, size: 20, color: Colors.grey),
+                              onPressed: () => Navigator.pushNamed(context, '/auth'),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.shopping_bag_outlined, size: 20, color: Colors.grey),
+                              onPressed: () => navigateToCart(context),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -254,29 +231,37 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Products Section
+            // Products Section (featured grid)
             Container(
               color: Colors.white,
               child: Padding(
-                padding: const EdgeInsets.all(40.0),
+                padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 32),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'PLACEHOLDER PRODUCTS SECTION',
+                      'Featured products',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 22,
                         color: Colors.black,
-                        letterSpacing: 1,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.5,
                       ),
                     ),
-                    const SizedBox(height: 48),
+                    const SizedBox(height: 16),
                     GridView.count(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount:
-                          MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                      crossAxisCount: MediaQuery.of(context).size.width > 1200
+                          ? 4
+                          : MediaQuery.of(context).size.width > 900
+                              ? 3
+                              : MediaQuery.of(context).size.width > 600
+                                  ? 2
+                                  : 1,
                       crossAxisSpacing: 24,
-                      mainAxisSpacing: 48,
+                      mainAxisSpacing: 24,
+                      childAspectRatio: 0.75,
                       children: const [
                         ProductCard(
                           title: 'Placeholder Product 1',
@@ -312,24 +297,55 @@ class HomeScreen extends StatelessWidget {
             // Footer
             Container(
               width: double.infinity,
-              color: Colors.grey[50],
-              padding: const EdgeInsets.all(24),
+              color: const Color(0xFFF7F7F8),
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 32),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Placeholder Footer',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                children: [
+                  Wrap(
+                    spacing: 40,
+                    runSpacing: 16,
+                    children: const [
+                      SizedBox(
+                        width: 240,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Union Shop', style: TextStyle(fontWeight: FontWeight.bold)),
+                            SizedBox(height: 8),
+                            Text('Official student union store. Find merch, gifts and stationery.'),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 160,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Collections', style: TextStyle(fontWeight: FontWeight.bold)),
+                            SizedBox(height: 8),
+                            Text('Gifts'),
+                            Text('Stationery'),
+                            Text('Sale Items'),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 160,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Help', style: TextStyle(fontWeight: FontWeight.bold)),
+                            SizedBox(height: 8),
+                            Text('Contact'),
+                            Text('Delivery'),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Students should customise this footer section',
-                    style: TextStyle(color: Colors.grey),
-                  ),
+                  const SizedBox(height: 24),
+                  const Text('© ${2025} Union Shop', style: TextStyle(color: Colors.grey)),
                 ],
               ),
             ),
@@ -354,44 +370,61 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/product');
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Center(
-                    child: Icon(Icons.image_not_supported, color: Colors.grey),
+    return Card(
+      elevation: 2,
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        onTap: () => Navigator.pushNamed(context, '/product'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // image area
+            AspectRatio(
+              aspectRatio: 1,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Image.network(
+                      imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey[300],
+                          child: const Center(
+                            child: Icon(Icons.image_not_supported, color: Colors.grey),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                );
-              },
+                  // price badge
+                  Positioned(
+                    right: 8,
+                    bottom: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      color: Colors.black54,
+                      child: Text(price, style: const TextStyle(color: Colors.white, fontSize: 12)),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 4),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 14, color: Colors.black),
-                maxLines: 2,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                    maxLines: 2,
+                  ),
+                ],
               ),
-              const SizedBox(height: 4),
-              Text(
-                price,
-                style: const TextStyle(fontSize: 13, color: Colors.grey),
-              ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
