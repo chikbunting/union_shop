@@ -10,7 +10,7 @@ class AuthPage extends StatelessWidget {
         title: const Text('Sign In / Sign Up'),
         backgroundColor: const Color(0xFF4d2963),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
