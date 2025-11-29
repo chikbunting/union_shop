@@ -24,9 +24,8 @@ void main() {
     // Tap first product title
     final productFinder = find.text('Placeholder Product 1');
     expect(productFinder, findsOneWidget);
-  // scroll until the product is visible (page is long)
-  await tester.scrollUntilVisible(productFinder, 300.0,
-    scrollable: find.byType(SingleChildScrollView));
+  // scroll by dragging the SingleChildScrollView until the product is visible
+  await tester.drag(find.byType(SingleChildScrollView), const Offset(0, -600));
   await tester.pumpAndSettle();
 
   await tester.tap(productFinder);
