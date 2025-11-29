@@ -1,49 +1,47 @@
-import '../models/product.dart';
+import 'package:union_shop/models/product.dart';
 
 class ProductService {
-  // In-memory demo data
-  static const _products = [
+  // Singleton
+  ProductService._();
+  static final ProductService instance = ProductService._();
+
+  final List<Product> _products = const [
     Product(
       id: 'p1',
-      title: 'Demo Magnet',
-      price: 10.0,
-      imageUrl: '',
+      title: 'Placeholder Product 1',
+      price: '£10.00',
+      description: 'A placeholder product in Gifts collection.',
       collection: 'Gifts',
+      imageUrl: '',
     ),
     Product(
       id: 'p2',
-      title: 'Demo Postcard',
-      price: 3.5,
-      imageUrl: '',
+      title: 'Placeholder Product 2',
+      price: '£15.00',
+      description: 'A placeholder product in Stationery collection.',
       collection: 'Stationery',
+      imageUrl: '',
     ),
     Product(
       id: 'p3',
-      title: 'Sale Magnet',
-      price: 5.0,
-      imageUrl: '',
+      title: 'Placeholder Product 3',
+      price: '£20.00',
+      description: 'A placeholder product in Sale Items.',
       collection: 'Sale Items',
-    ),
-    Product(
-      id: 'p4',
-      title: 'Collection Product 1',
-      price: 9.99,
       imageUrl: '',
-      collection: 'Collections Example',
     ),
   ];
 
-  static List<String> getCollections() {
-    final set = <String>{};
-    for (final p in _products) set.add(p.collection);
+  List<String> getCollections() {
+    final set = _products.map((p) => p.collection).toSet();
     return set.toList();
   }
 
-  static List<Product> getProductsForCollection(String collection) {
-    return _products.where((p) => p.collection == collection).toList();
+  List<Product> getProductsForCollection(String collectionName) {
+    return _products.where((p) => p.collection == collectionName).toList();
   }
 
-  static Product? getProductById(String id) {
+  Product? getProductById(String id) {
     return _products.firstWhere((p) => p.id == id, orElse: () => _products.first);
   }
 }
