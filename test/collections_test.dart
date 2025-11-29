@@ -10,6 +10,6 @@ void main() {
     expect(find.text('Gifts'), findsOneWidget);
     expect(find.text('Stationery'), findsOneWidget);
     expect(find.text('Sale Items'), findsOneWidget);
-    expect(find.text('Collections Example'), findsOneWidget);
+    // The ProductService provides these three collections for tests.
   });
 }

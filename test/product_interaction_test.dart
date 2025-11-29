@@ -19,10 +19,15 @@ void main() {
     await tester.pumpAndSettle();
 
     // increase quantity once
-    await tester.tap(find.byIcon(Icons.add));
+    // ensure controls are visible before interacting (prevents off-screen tap failures)
+    final addIcon = find.byIcon(Icons.add);
+    await tester.ensureVisible(addIcon);
+    await tester.tap(addIcon);
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Add to Cart'));
+    final addToCartBtn = find.text('Add to Cart');
+    await tester.ensureVisible(addToCartBtn);
+    await tester.tap(addToCartBtn);
     await tester.pumpAndSettle();
 
     expect(CartService.instance.totalItems, greaterThanOrEqualTo(1));
