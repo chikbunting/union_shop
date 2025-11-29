@@ -24,8 +24,12 @@ void main() {
     // Tap first product title
     final productFinder = find.text('Placeholder Product 1');
     expect(productFinder, findsOneWidget);
+  // scroll until the product is visible (page is long)
+  await tester.scrollUntilVisible(productFinder, 300.0,
+    scrollable: find.byType(SingleChildScrollView));
+  await tester.pumpAndSettle();
 
-    await tester.tap(productFinder);
+  await tester.tap(productFinder);
     await tester.pumpAndSettle();
 
     // Product page should show placeholder product name
