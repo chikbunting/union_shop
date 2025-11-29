@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/collection_page.dart';
+import 'package:union_shop/services/product_service.dart';
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final collections = const [
-      'Gifts',
-      'Stationery',
-      'Sale Items',
-      'Collections Example',
-    ];
+    final collections = ProductService.getCollections();
 
     return Scaffold(
       appBar: AppBar(
