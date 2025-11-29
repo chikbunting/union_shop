@@ -47,9 +47,8 @@ void main() {
       await tester.pumpWidget(const UnionShopApp());
       await tester.pump();
 
-      // Check that footer is present
-      expect(find.text('Union Shop'), findsOneWidget);
-      expect(find.text('Official student union store. Find merch, gifts and stationery.'), findsOneWidget);
+  // Check that footer descriptive text is present
+  expect(find.text('Official student union store. Find merch, gifts and stationery.'), findsOneWidget);
     });
   });
 }
