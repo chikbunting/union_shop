@@ -211,7 +211,7 @@ class ProductPage extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 24),
                   const Text(
                     'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
                     style: TextStyle(
@@ -221,10 +221,75 @@ class ProductPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
+                  // Student instruction line (kept from earlier)
                   const Text(
                     'Students should add size options, colour options, quantity selector, add to cart button, and buy now button here.',
                     style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
+                  const SizedBox(height: 12),
+                  // Simple functional controls: size, colour, quantity, add to cart
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          value: 'One Size',
+                          items: const [
+                            DropdownMenuItem(value: 'One Size', child: Text('One Size')),
+                            DropdownMenuItem(value: 'Small', child: Text('Small')),
+                            DropdownMenuItem(value: 'Medium', child: Text('Medium')),
+                            DropdownMenuItem(value: 'Large', child: Text('Large')),
+                          ],
+                          onChanged: (v) {},
+                          decoration: const InputDecoration(labelText: 'Size'),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          value: 'Black',
+                          items: const [
+                            DropdownMenuItem(value: 'Black', child: Text('Black')),
+                            DropdownMenuItem(value: 'White', child: Text('White')),
+                          ],
+                          onChanged: (v) {},
+                          decoration: const InputDecoration(labelText: 'Colour'),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      const Text('Quantity:'),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: TextFormField(
+                          initialValue: '1',
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // Add to cart demo behavior
+                          // We keep this minimal and use CartService directly
+                        },
+                        child: const Text('Add to Cart'),
+                      ),
+                      const SizedBox(width: 12),
+                      ElevatedButton(
+                        onPressed: placeholderCallbackForButtons,
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
+                        child: const Text('Buy Now'),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),
