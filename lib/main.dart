@@ -6,6 +6,8 @@ import 'package:union_shop/sale_page.dart';
 import 'package:union_shop/auth_page.dart';
 import 'package:union_shop/cart_page.dart';
 import 'package:union_shop/widgets/header.dart';
+import 'package:union_shop/services/product_service.dart';
+import 'package:union_shop/widgets/hero_banner.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -71,79 +73,8 @@ class HomeScreen extends StatelessWidget {
             // Header widget (extracted to widgets/header.dart)
             const Header(),
 
-            // Hero Section
-            SizedBox(
-              height: 400,
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  // Background image as a widget so we can provide an errorBuilder
-                  Positioned.fill(
-                    child: Image.network(
-                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(color: Colors.grey[300]);
-                      },
-                    ),
-                  ),
-                  // dark overlay
-                  Positioned.fill(
-                    child: Container(color: Colors.black.withOpacity(0.7)),
-                  ),
-                  // Content overlay
-                  Positioned(
-                    left: 24,
-                    right: 24,
-                    top: 80,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Placeholder Hero Title',
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            height: 1.2,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          "This is placeholder text for the hero section.",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            height: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 32),
-                        ElevatedButton(
-                          onPressed: placeholderCallbackForButtons,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4d2963),
-                            foregroundColor: Colors.white,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.zero,
-                            ),
-                          ),
-                          child: const Text(
-                            'BROWSE PRODUCTS',
-                            style: TextStyle(fontSize: 14, letterSpacing: 1),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        TextButton(
-                          onPressed: () => navigateToCollections(context),
-                          child: const Text('VIEW ALL PRODUCTS'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Hero section (extracted)
+            const HeroBanner(),
 
             // Products Section (featured grid)
             Container(
@@ -176,32 +107,9 @@ class HomeScreen extends StatelessWidget {
                       crossAxisSpacing: 24,
                       mainAxisSpacing: 24,
                       childAspectRatio: 0.75,
-                      children: const [
-                        ProductCard(
-                          title: 'Placeholder Product 1',
-                          price: '£10.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 2',
-                          price: '£15.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 3',
-                          price: '£20.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 4',
-                          price: '£25.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                      ],
+                      children: ProductService.instance.getAllProducts().take(4).map((p) {
+                        return ProductCard(title: p.title, price: p.price, imageUrl: p.imageUrl);
+                      }).toList(),
                     ),
                   ],
                 ),
