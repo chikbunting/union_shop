@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/product_service.dart';
+import 'package:union_shop/widgets/product_card.dart';
 
 class CollectionPage extends StatelessWidget {
   final String collectionName;
@@ -65,16 +66,18 @@ class CollectionPage extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Expanded(
-              child: ListView.separated(
-                itemCount: products.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 8),
-                itemBuilder: (context, index) {
-                  final p = products[index];
-                  return ListTile(
-                title: Text(p.title),
-                trailing: Text(p.price),
-                  );
-                },
+              child: GridView.count(
+                crossAxisCount: MediaQuery.of(context).size.width > 900
+                    ? 3
+                    : MediaQuery.of(context).size.width > 600
+                        ? 2
+                        : 1,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.8,
+                children: products
+                    .map((p) => ProductCard(title: p.title, price: p.price, imageUrl: p.imageUrl))
+                    .toList(),
               ),
             ),
           ],
