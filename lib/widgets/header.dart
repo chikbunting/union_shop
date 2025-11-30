@@ -62,7 +62,7 @@ class Header extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(onPressed: navigateToCollections, child: const Text('Collections')),
+                      TextButton(onPressed: navigateToCollections, child: const Text('Shop')),
                       TextButton(onPressed: () => Navigator.pushNamed(context, '/sale'), child: const Text('Sale')),
                       TextButton(onPressed: () => Navigator.pushNamed(context, '/about'), child: const Text('About')),
                     ],
