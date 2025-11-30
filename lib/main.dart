@@ -6,7 +6,7 @@ import 'package:union_shop/sale_page.dart';
 import 'package:union_shop/auth_page.dart';
 import 'package:union_shop/cart_page.dart';
 import 'package:union_shop/widgets/header.dart';
-import 'package:union_shop/widgets/product_image.dart';
+import 'package:union_shop/widgets/product_card.dart';
 import 'package:union_shop/services/product_service.dart';
 import 'package:union_shop/widgets/hero_banner.dart';
 
@@ -207,7 +207,18 @@ class ProductCard extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned.fill(
-                    child: ProductImage(imageUrl: imageUrl, semanticLabel: title),
+                    child: Image.network(
+                      imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey[300],
+                          child: const Center(
+                            child: Icon(Icons.image_not_supported, color: Colors.grey),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   // price badge
                   Positioned(
