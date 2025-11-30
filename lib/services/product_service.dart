@@ -30,7 +30,17 @@ class ProductService {
       collection: 'Sale Items',
       imageUrl: '',
     ),
+    Product(
+      id: 'p4',
+      title: 'Placeholder Product 4',
+      price: '£25.00',
+      description: 'Another placeholder to fill the grid.',
+      collection: 'Gifts',
+      imageUrl: '',
+    ),
   ];
+
+  List<Product> getAllProducts() => _products;
 
   List<String> getCollections() {
     final set = _products.map((p) => p.collection).toSet();
