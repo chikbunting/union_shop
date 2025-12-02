@@ -28,8 +28,6 @@ class CartItem {
 
 class CartService {
   // Simple singleton cart for demo purposes
-  CartService._();
-  static final CartService instance = CartService._();
 
   final Map<String, CartItem> _items = {};
 
@@ -37,6 +35,8 @@ class CartService {
   CartService._() {
     _loadFromPrefs();
   }
+
+  static final CartService instance = CartService._();
 
   Future<void> _loadFromPrefs() async {
     try {
