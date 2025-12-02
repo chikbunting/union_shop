@@ -16,10 +16,15 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    // Priority: route arguments, then URL query parameter 'q', then show all
     final arg = ModalRoute.of(context)?.settings.arguments;
+    final urlQuery = Uri.base.queryParameters['q'];
     if (arg is String && arg.isNotEmpty) {
       _controller.text = arg;
       _runSearch(arg);
+    } else if (urlQuery != null && urlQuery.isNotEmpty) {
+      _controller.text = urlQuery;
+      _runSearch(urlQuery);
     } else {
       // show all by default
       _results = ProductService.instance.getAllProducts();
@@ -30,6 +35,10 @@ class _SearchPageState extends State<SearchPage> {
     setState(() {
       _results = ProductService.instance.search(q);
     });
+    // We intentionally do not try to modify browser history here to avoid
+    // platform-specific imports. If the app is served on the web and you want
+    // the search URL to update, users can navigate to '/search?q=term' directly
+    // or we can add an optional web-only update later.
   }
 
   @override
