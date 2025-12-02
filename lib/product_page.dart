@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
+import 'package:union_shop/services/product_service.dart';
 import 'package:union_shop/models/product.dart';
 import 'package:union_shop/widgets/header.dart';
 
@@ -24,15 +25,25 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   void _addToCart() {
-    // Use a placeholder Product for demo purposes
-    final product = Product(
-      id: 'p-demo',
-      title: 'Placeholder Product Name',
-      price: '£15.00',
-      description: 'Demo product',
-      collection: 'Demo',
-      imageUrl: '',
-    );
+    final routeArg = ModalRoute.of(context)?.settings.arguments;
+    final product = (routeArg is String)
+        ? (ProductService.instance.getProductById(routeArg) ?? Product(
+            id: 'p-demo',
+            title: 'Placeholder Product Name',
+            price: '£15.00',
+            description: 'Demo product',
+            collection: 'Demo',
+            imageUrl: '',
+          ))
+        : Product(
+            id: 'p-demo',
+            title: 'Placeholder Product Name',
+            price: '£15.00',
+            description: 'Demo product',
+            collection: 'Demo',
+            imageUrl: '',
+          );
+
     CartService.instance.add(product, quantity: _quantity, size: _selectedSize, colour: _selectedColour);
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to cart')));
   }
@@ -54,89 +65,105 @@ class _ProductPageState extends State<ProductPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Product image
-                  Container(
-                    height: 300,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey[200],
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        'assets/images/p1.png',
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: Colors.grey[300],
-                            child: const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.image_not_supported,
-                                    size: 64,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    'Image unavailable',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ],
-                              ),
-                            ),
+                  // Product image and details loaded from ProductService when a product id is provided via route arguments
+                  Builder(builder: (context) {
+                    final routeArg = ModalRoute.of(context)?.settings.arguments;
+                    final product = (routeArg is String)
+                        ? (ProductService.instance.getProductById(routeArg) ?? Product(
+                            id: 'p-demo',
+                            title: 'Placeholder Product Name',
+                            price: '£15.00',
+                            description: 'Demo product',
+                            collection: 'Demo',
+                            imageUrl: '',
+                          ))
+                        : Product(
+                            id: 'p-demo',
+                            title: 'Placeholder Product Name',
+                            price: '£15.00',
+                            description: 'Demo product',
+                            collection: 'Demo',
+                            imageUrl: '',
                           );
-                        },
-                      ),
-                    ),
-                  ),
 
-                  const SizedBox(height: 24),
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 300,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.grey[200],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: product.imageUrl.isNotEmpty
+                                ? Image.asset(
+                                    product.imageUrl,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                        color: Colors.grey[300],
+                                        child: const Center(
+                                          child: Icon(Icons.image_not_supported, size: 64, color: Colors.grey),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Container(
+                                    color: Colors.grey[300],
+                                    child: const Center(
+                                      child: Icon(Icons.image_not_supported, size: 64, color: Colors.grey),
+                                    ),
+                                  ),
+                          ),
+                        ),
 
-                  // Product name
-                  const Text(
-                    'Placeholder Product Name',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
+                        const SizedBox(height: 24),
 
-                  const SizedBox(height: 12),
+                        // Product name
+                        Text(
+                          product.title,
+                          style: const TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
 
-                  // Product price
-                  const Text(
-                    '£15.00',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4d2963),
-                    ),
-                  ),
+                        const SizedBox(height: 12),
 
-                  const SizedBox(height: 24),
+                        // Product price
+                        Text(
+                          product.price,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF4d2963),
+                          ),
+                        ),
 
-                  // Product description
-                  const Text(
-                    'Description',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  const Text(
-                    'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                      height: 1.5,
-                    ),
-                  ),
+                        const SizedBox(height: 24),
+
+                        // Product description
+                        const Text(
+                          'Description',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Text(
+                          product.description,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                            height: 1.5,
+                          ),
+                        ),
                   const SizedBox(height: 16),
                   // Student instruction line (kept from earlier)
                   const Text(
