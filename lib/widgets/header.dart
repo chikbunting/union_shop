@@ -75,9 +75,9 @@ class Header extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.search, size: 20, color: Colors.grey),
-                      onPressed: () {},
-                    ),
+                          icon: const Icon(Icons.search, size: 20, color: Colors.grey),
+                          onPressed: () => Navigator.pushNamed(context, '/search'),
+                        ),
                     IconButton(
                       icon: const Icon(Icons.person_outline, size: 20, color: Colors.grey),
                       onPressed: () => Navigator.pushNamed(context, '/auth'),

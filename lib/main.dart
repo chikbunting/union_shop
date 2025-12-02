@@ -5,6 +5,7 @@ import 'package:union_shop/collections_page.dart';
 import 'package:union_shop/sale_page.dart';
 import 'package:union_shop/auth_page.dart';
 import 'package:union_shop/cart_page.dart';
+import 'package:union_shop/search_page.dart';
 import 'package:union_shop/widgets/header.dart';
 import 'package:union_shop/widgets/product_card.dart';
 import 'package:union_shop/services/product_service.dart';
@@ -32,6 +33,7 @@ class UnionShopApp extends StatelessWidget {
       // In your browser, try these links: http://localhost:49856/#/product
       routes: {
         '/product': (context) => const ProductPage(),
+        '/search': (context) => const SearchPage(),
         '/about': (context) => const AboutPage(),
         '/collections': (context) => const CollectionsPage(),
         '/sale': (context) => const SalePage(),
@@ -173,7 +175,16 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 24),
-                  const Text('© ${2025} Union Shop', style: TextStyle(color: Colors.grey)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('© ${2025} Union Shop', style: TextStyle(color: Colors.grey)),
+                      TextButton(
+                        onPressed: () => Navigator.pushNamed(context, '/search'),
+                        child: const Text('Search'),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

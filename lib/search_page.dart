@@ -59,25 +59,25 @@ class _SearchPageState extends State<SearchPage> {
             const SizedBox(height: 16),
             Expanded(
               child: _results.isEmpty
-+                  ? const Center(child: Text('No results found'))
-+                  : GridView.count(
-+                      crossAxisCount: MediaQuery.of(context).size.width > 900
-+                          ? 3
-+                          : MediaQuery.of(context).size.width > 600
-+                              ? 2
-+                              : 1,
-+                      crossAxisSpacing: 12,
-+                      mainAxisSpacing: 12,
-+                      childAspectRatio: 0.75,
-+                      children: _results.map<Widget>((p) {
-+                        return ProductCard(
-+                          productId: p.id,
-+                          title: p.title,
-+                          price: p.price,
-+                          imageUrl: p.imageUrl,
-+                        );
-+                      }).toList(),
-+                    ),
+                  ? const Center(child: Text('No results found'))
+                  : GridView.count(
+            crossAxisCount: MediaQuery.of(context).size.width > 900
+              ? 3
+              : MediaQuery.of(context).size.width > 600
+                ? 2
+                : 1,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      childAspectRatio: 0.75,
+                      children: _results.map<Widget>((p) {
+                        return ProductCard(
+                          productId: p.id,
+                          title: p.title,
+                          price: p.price,
+                          imageUrl: p.imageUrl,
+                        );
+                      }).toList(),
+                    ),
             ),
           ],
         ),
