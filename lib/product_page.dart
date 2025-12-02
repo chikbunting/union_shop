@@ -65,7 +65,6 @@ class _ProductPageState extends State<ProductPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Product image and details loaded from ProductService when a product id is provided via route arguments
                   Builder(builder: (context) {
                     final routeArg = ModalRoute.of(context)?.settings.arguments;
                     final product = (routeArg is String)
@@ -164,81 +163,86 @@ class _ProductPageState extends State<ProductPage> {
                             height: 1.5,
                           ),
                         ),
-                  const SizedBox(height: 16),
-                  // Student instruction line (kept from earlier)
-                  const Text(
-                    'Students should add size options, colour options, quantity selector, add to cart button, and buy now button here.',
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 12),
-                  // Simple functional controls: size, colour, quantity, add to cart
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DropdownButtonFormField<String>(
-                          value: _selectedSize,
-                          items: const [
-                            DropdownMenuItem(value: 'One Size', child: Text('One Size')),
-                            DropdownMenuItem(value: 'Small', child: Text('Small')),
-                            DropdownMenuItem(value: 'Medium', child: Text('Medium')),
-                            DropdownMenuItem(value: 'Large', child: Text('Large')),
-                          ],
-                          onChanged: (v) => setState(() => _selectedSize = v ?? 'One Size'),
-                          decoration: const InputDecoration(labelText: 'Size'),
+                        const SizedBox(height: 16),
+                        // Student instruction line (kept from earlier)
+                        const Text(
+                          'Students should add size options, colour options, quantity selector, add to cart button, and buy now button here.',
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: DropdownButtonFormField<String>(
-                          value: _selectedColour,
-                          items: const [
-                            DropdownMenuItem(value: 'Black', child: Text('Black')),
-                            DropdownMenuItem(value: 'White', child: Text('White')),
-                          ],
-                          onChanged: (v) => setState(() => _selectedColour = v ?? 'Black'),
-                          decoration: const InputDecoration(labelText: 'Colour'),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      const Text('Quantity:'),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Row(
+                        const SizedBox(height: 12),
+                        // Simple functional controls: size, colour, quantity, add to cart
+                        Row(
                           children: [
-                            IconButton(
-                              icon: const Icon(Icons.remove),
-                              onPressed: () => setState(() { if (_quantity > 1) _quantity -= 1; }),
+                            Expanded(
+                              child: DropdownButtonFormField<String>(
+                                value: _selectedSize,
+                                items: const [
+                                  DropdownMenuItem(value: 'One Size', child: Text('One Size')),
+                                  DropdownMenuItem(value: 'Small', child: Text('Small')),
+                                  DropdownMenuItem(value: 'Medium', child: Text('Medium')),
+                                  DropdownMenuItem(value: 'Large', child: Text('Large')),
+                                ],
+                                onChanged: (v) => setState(() => _selectedSize = v ?? 'One Size'),
+                                decoration: const InputDecoration(labelText: 'Size'),
+                              ),
                             ),
-                            Text('$_quantity'),
-                            IconButton(
-                              icon: const Icon(Icons.add),
-                              onPressed: () => setState(() => _quantity += 1),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: DropdownButtonFormField<String>(
+                                value: _selectedColour,
+                                items: const [
+                                  DropdownMenuItem(value: 'Black', child: Text('Black')),
+                                  DropdownMenuItem(value: 'White', child: Text('White')),
+                                ],
+                                onChanged: (v) => setState(() => _selectedColour = v ?? 'Black'),
+                                decoration: const InputDecoration(labelText: 'Colour'),
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: _addToCart,
-                        child: const Text('Add to Cart'),
-                      ),
-                      const SizedBox(width: 12),
-                      ElevatedButton(
-                        onPressed: placeholderCallbackForButtons,
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-                        child: const Text('Buy Now'),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
+                        const SizedBox(height: 12),
+                        Row(
+                          children: [
+                            const Text('Quantity:'),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.remove),
+                                    onPressed: () => setState(() {
+                                      if (_quantity > 1) _quantity -= 1;
+                                    }),
+                                  ),
+                                  Text('$_quantity'),
+                                  IconButton(
+                                    icon: const Icon(Icons.add),
+                                    onPressed: () => setState(() => _quantity += 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: _addToCart,
+                              child: const Text('Add to Cart'),
+                            ),
+                            const SizedBox(width: 12),
+                            ElevatedButton(
+                              onPressed: placeholderCallbackForButtons,
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
+                              child: const Text('Buy Now'),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    );
+                  }),
                 ],
               ),
             ),
