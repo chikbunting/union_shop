@@ -58,31 +58,39 @@ class CollectionPage extends StatelessWidget {
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
-              children: const [
-                FilterChip(label: Text('Under £10'), selected: false, onSelected: null),
-                FilterChip(label: Text('Sale'), selected: false, onSelected: null),
-                FilterChip(label: Text('Eco'), selected: false, onSelected: null),
+              children: [
+                // Provide no-op callbacks so chips are interactive but non-functional for the coursework
+                FilterChip(label: const Text('Under £10'), selected: false, onSelected: (v) {}),
+                FilterChip(label: const Text('Sale'), selected: false, onSelected: (v) {}),
+                FilterChip(label: const Text('Eco'), selected: false, onSelected: (v) {}),
               ],
             ),
             const SizedBox(height: 12),
             Expanded(
-              child: GridView.count(
-                crossAxisCount: MediaQuery.of(context).size.width > 900
-                    ? 3
-                    : MediaQuery.of(context).size.width > 600
-                        ? 2
-                        : 1,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.8,
-        children: products
-          .map((p) => ProductCard(
-              productId: p.id,
-              title: p.title,
-              price: p.price,
-              imageUrl: p.imageUrl,
-            ))
-          .toList(),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: GridView.count(
+                  shrinkWrap: false,
+                  crossAxisCount: MediaQuery.of(context).size.width > 1200
+                      ? 4
+                      : MediaQuery.of(context).size.width > 900
+                          ? 3
+                          : MediaQuery.of(context).size.width > 600
+                              ? 2
+                              : 1,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: 0.75,
+                  padding: const EdgeInsets.all(4),
+                  children: products
+                      .map((p) => ProductCard(
+                            productId: p.id,
+                            title: p.title,
+                            price: p.price,
+                            imageUrl: p.imageUrl,
+                          ))
+                      .toList(),
+                ),
               ),
             ),
           ],
