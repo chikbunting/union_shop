@@ -12,8 +12,7 @@ class ProductService {
       price: '£10.00',
       description: 'A placeholder product in Gifts collection.',
       collection: 'Gifts',
-      imageUrl:
-          'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+    imageUrl: 'assets/images/p1.png',
     ),
     Product(
       id: 'p2',
@@ -21,8 +20,7 @@ class ProductService {
       price: '£15.00',
       description: 'A placeholder product in Stationery collection.',
       collection: 'Stationery',
-      imageUrl:
-          'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet2_1024x1024@2x.jpg?v=1752230283',
+    imageUrl: 'assets/images/p2.png',
     ),
     Product(
       id: 'p3',
@@ -30,8 +28,7 @@ class ProductService {
       price: '£20.00',
       description: 'A placeholder product in Sale Items.',
       collection: 'Sale Items',
-      imageUrl:
-          'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet3_1024x1024@2x.jpg?v=1752230284',
+    imageUrl: 'assets/images/p3.png',
     ),
     Product(
       id: 'p4',
@@ -39,8 +36,7 @@ class ProductService {
       price: '£25.00',
       description: 'Another placeholder to fill the grid.',
       collection: 'Gifts',
-      imageUrl:
-          'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet4_1024x1024@2x.jpg?v=1752230285',
+    imageUrl: 'assets/images/p4.png',
     ),
   ];
 
