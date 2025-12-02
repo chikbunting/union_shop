@@ -20,7 +20,7 @@ class ProductCard extends StatelessWidget {
       elevation: 2,
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, '/product'),
+  onTap: () => Navigator.pushNamed(context, '/product', arguments: productId),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
