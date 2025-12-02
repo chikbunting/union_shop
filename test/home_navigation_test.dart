@@ -31,7 +31,7 @@ void main() {
   await tester.tap(productFinder);
     await tester.pumpAndSettle();
 
-    // Product page should show placeholder product name
-    expect(find.text('Placeholder Product Name'), findsOneWidget);
+    // Product page should show the product title from ProductService
+    expect(find.text('Placeholder Product 1'), findsOneWidget);
   });
 }
