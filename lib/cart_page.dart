@@ -13,7 +13,8 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    final items = CartService.instance.items;
+    final itemsMap = CartService.instance.itemsMap;
+    final entries = itemsMap.entries.toList();
     return Scaffold(
       appBar: AppBar(title: const Text('Cart'), backgroundColor: const Color(0xFF4d2963)),
       body: Padding(
@@ -21,17 +22,47 @@ class _CartPageState extends State<CartPage> {
         child: Column(
           children: [
             Expanded(
-              child: items.isEmpty
+              child: entries.isEmpty
                   ? const Center(child: Text('Your cart is empty'))
                   : ListView.separated(
-                      itemCount: items.length,
+                      itemCount: entries.length,
                       separatorBuilder: (_, __) => const Divider(),
                       itemBuilder: (context, index) {
-                        final it = items[index];
+                        final entry = entries[index];
+                        final key = entry.key;
+                        final it = entry.value;
                         return ListTile(
                           title: Text(it.product.title),
                           subtitle: Text('${it.size ?? ''} ${it.colour ?? ''}'),
-                          trailing: Text('x${it.quantity}'),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove_circle_outline),
+                                onPressed: () {
+                                  final newQty = it.quantity - 1;
+                                  CartService.instance.updateQuantity(key, newQty);
+                                  setState(() {});
+                                },
+                              ),
+                              Text('${it.quantity}'),
+                              IconButton(
+                                icon: const Icon(Icons.add_circle_outline),
+                                onPressed: () {
+                                  final newQty = it.quantity + 1;
+                                  CartService.instance.updateQuantity(key, newQty);
+                                  setState(() {});
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.delete_outline),
+                                onPressed: () {
+                                  CartService.instance.remove(key);
+                                  setState(() {});
+                                },
+                              ),
+                            ],
+                          ),
                         );
                       },
                     ),

@@ -67,6 +67,9 @@ class CartService {
 
   List<CartItem> get items => _items.values.toList();
 
+  /// Return an unmodifiable view of the internal items map so callers can access keys.
+  Map<String, CartItem> get itemsMap => Map.unmodifiable(_items);
+
   int get totalItems => _items.values.fold(0, (v, e) => v + e.quantity);
 
   double get totalPrice {
