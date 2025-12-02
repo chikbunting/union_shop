@@ -54,4 +54,13 @@ class ProductService {
   Product? getProductById(String id) {
     return _products.firstWhere((p) => p.id == id, orElse: () => _products.first);
   }
+
+  /// Simple search over title and description (case-insensitive)
+  List<Product> search(String query) {
+    final q = query.toLowerCase().trim();
+    if (q.isEmpty) return _products;
+    return _products.where((p) {
+      return p.title.toLowerCase().contains(q) || p.description.toLowerCase().contains(q) || p.collection.toLowerCase().contains(q);
+    }).toList();
+  }
 }
