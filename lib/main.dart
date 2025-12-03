@@ -115,17 +115,14 @@ class HomeScreen extends StatelessWidget {
                       crossAxisSpacing: 24,
                       mainAxisSpacing: 24,
                       childAspectRatio: 0.75,
-                      // Featured products explicitly set to p4, p5, p6
-                      children: ['p4', 'p5', 'p6']
-                          .map((id) => ProductService.instance.getProductById(id))
-                          .where((p) => p != null)
-                          .map((p) => ProductCard(
-                                productId: p!.id,
-                                title: p.title,
-                                price: p.price,
-                                imageUrl: p.imageUrl,
-                              ))
-                          .toList(),
+                      children: ProductService.instance.getAllProducts().take(4).map((p) {
+                        return ProductCard(
+                          productId: p.id,
+                          title: p.title,
+                          price: p.price,
+                          imageUrl: p.imageUrl,
+                        );
+                      }).toList(),
                     ),
                   ],
                 ),
