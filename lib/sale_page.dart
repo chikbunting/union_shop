@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/services/product_service.dart';
+import 'package:union_shop/models/product.dart';
 
 class SalePage extends StatelessWidget {
   const SalePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Show selected sale products (p1 and p5) with images
-    final saleProducts = [
-      ProductService.instance.getProductById('p1'),
-      ProductService.instance.getProductById('p5'),
-    ].where((p) => p != null).toList();
+    // Show selected sale products (p1 and p5) with images, plus legacy static sale items
+    final p1 = ProductService.instance.getProductById('p1');
+    final p5 = ProductService.instance.getProductById('p5');
+
+    final List<dynamic> saleEntries = [];
+    if (p1 != null) saleEntries.add(p1);
+    if (p5 != null) saleEntries.add(p5);
+    saleEntries.addAll([
+      {'title': 'Sale Magnet', 'price': '£5.00', 'old': '£10.00'},
+      {'title': 'Discounted Postcard', 'price': '£2.50', 'old': '£5.00'},
+      {'title': 'Sale Sticker', 'price': '£1.00', 'old': '£2.00'},
+    ]);
 
     return Scaffold(
       appBar: AppBar(
@@ -30,22 +38,31 @@ class SalePage extends StatelessWidget {
             const SizedBox(height: 12),
             Expanded(
               child: ListView.separated(
-                itemCount: saleProducts.length,
+                itemCount: saleEntries.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 8),
                 itemBuilder: (context, index) {
-                  final p = saleProducts[index]!;
-                  return ListTile(
-                    leading: Image.asset(
-                      p.imageUrl,
-                      width: 72,
-                      height: 72,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => const Icon(Icons.image_not_supported),
-                    ),
-                    title: Text(p.title),
-                    subtitle: Text(p.description),
-                    trailing: Text(p.price),
-                  );
+                  final entry = saleEntries[index];
+                  if (entry is Product) {
+                    return ListTile(
+                      leading: Image.asset(
+                        entry.imageUrl,
+                        width: 72,
+                        height: 72,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => const Icon(Icons.image_not_supported),
+                      ),
+                      title: Text(entry.title),
+                      subtitle: Text(entry.description),
+                      trailing: Text(entry.price),
+                    );
+                  } else {
+                    final Map m = entry as Map;
+                    return ListTile(
+                      title: Text(m['title'] ?? ''),
+                      subtitle: Text('Was ${m['old'] ?? ''}'),
+                      trailing: Text(m['price'] ?? ''),
+                    );
+                  }
                 },
               ),
             ),
