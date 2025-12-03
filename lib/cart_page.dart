@@ -33,6 +33,15 @@ class _CartPageState extends State<CartPage> {
                         final key = entry.key;
                         final it = entry.value;
                         return ListTile(
+                          leading: Container(
+                            width: 56,
+                            height: 56,
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: Colors.grey[100]),
+                            child: it.product.imageUrl.startsWith('assets/')
+                                ? Image.asset(it.product.imageUrl, fit: BoxFit.cover, errorBuilder: (c, e, s) => const Icon(Icons.image_not_supported))
+                                : Image.network(it.product.imageUrl, fit: BoxFit.cover, errorBuilder: (c, e, s) => const Icon(Icons.image_not_supported)),
+                          ),
                           title: Text(it.product.title),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
