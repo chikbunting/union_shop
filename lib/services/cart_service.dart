@@ -8,14 +8,20 @@ class CartItem {
   int quantity;
   final String? size;
   final String? colour;
+  final String? personalisedText;
+  final double? personalisedFontSize;
+  final String? personalisedTextColor;
 
-  CartItem({required this.product, this.quantity = 1, this.size, this.colour});
+  CartItem({required this.product, this.quantity = 1, this.size, this.colour, this.personalisedText, this.personalisedFontSize, this.personalisedTextColor});
 
   Map<String, dynamic> toJson() => {
         'product': product.toJson(),
         'quantity': quantity,
         'size': size,
         'colour': colour,
+        'personalisedText': personalisedText,
+        'personalisedFontSize': personalisedFontSize,
+        'personalisedTextColor': personalisedTextColor,
       };
 
   static CartItem fromJson(Map<String, dynamic> json) => CartItem(
@@ -23,6 +29,9 @@ class CartItem {
         quantity: json['quantity'] as int? ?? 1,
         size: json['size'] as String?,
         colour: json['colour'] as String?,
+        personalisedText: json['personalisedText'] as String?,
+        personalisedFontSize: (json['personalisedFontSize'] is num) ? (json['personalisedFontSize'] as num).toDouble() : double.tryParse((json['personalisedFontSize'] ?? '').toString()),
+        personalisedTextColor: json['personalisedTextColor'] as String?,
       );
 }
 
@@ -55,12 +64,12 @@ class CartService {
 
   void clear() => _items.clear();
 
-  void add(Product product, {int quantity = 1, String? size, String? colour}) {
-    final key = '${product.id}_${size ?? ''}_${colour ?? ''}';
+  void add(Product product, {int quantity = 1, String? size, String? colour, String? personalisedText, double? personalisedFontSize, String? personalisedTextColor}) {
+    final key = '${product.id}_${size ?? ''}_${colour ?? ''}_${personalisedText ?? ''}_${personalisedFontSize?.toString() ?? ''}_${personalisedTextColor ?? ''}';
     if (_items.containsKey(key)) {
       _items[key]!.quantity += quantity;
     } else {
-      _items[key] = CartItem(product: product, quantity: quantity, size: size, colour: colour);
+      _items[key] = CartItem(product: product, quantity: quantity, size: size, colour: colour, personalisedText: personalisedText, personalisedFontSize: personalisedFontSize, personalisedTextColor: personalisedTextColor);
     }
     _saveToPrefs();
   }
