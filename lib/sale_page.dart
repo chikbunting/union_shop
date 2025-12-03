@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/footer.dart';
 
 class SalePage extends StatelessWidget {
   const SalePage({super.key});
@@ -43,6 +44,7 @@ class SalePage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const Footer(),
     );
   }
 }
