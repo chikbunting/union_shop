@@ -64,6 +64,7 @@ class Header extends StatelessWidget {
                     children: [
                       TextButton(onPressed: navigateToCollections, child: const Text('Shop')),
                       TextButton(onPressed: () => Navigator.pushNamed(context, '/sale'), child: const Text('Sale')),
+                      TextButton(onPressed: () => Navigator.pushNamed(context, '/personalisation'), child: const Text('Personalisation')),
                       TextButton(onPressed: () => Navigator.pushNamed(context, '/about'), child: const Text('About')),
                     ],
                   ),

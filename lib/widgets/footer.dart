@@ -46,6 +46,10 @@ class Footer extends StatelessWidget {
                         child: const Align(alignment: Alignment.centerLeft, child: Text('Shop')),
                       ),
                       TextButton(
+                        onPressed: () => Navigator.pushNamed(context, '/personalisation'),
+                        child: const Align(alignment: Alignment.centerLeft, child: Text('Personalisation')),
+                      ),
+                      TextButton(
                         onPressed: () => Navigator.pushNamed(context, '/sale'),
                         child: const Align(alignment: Alignment.centerLeft, child: Text('Sale Items')),
                       ),
