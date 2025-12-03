@@ -38,6 +38,38 @@ class ProductService {
       collection: 'Gifts',
     imageUrl: 'assets/images/p4.png',
     ),
+    Product(
+      id: 'notebook_a5_blue',
+      title: 'A5 Notebook — Blue',
+      price: '£6.50',
+      description: 'A durable A5 notebook with blue cover. 80 pages.',
+      collection: 'Stationery',
+      imageUrl: 'assets/images/products/stationery/notebook_a5_blue_800.png',
+    ),
+    Product(
+      id: 'pen_metal_black',
+      title: 'Metal Pen — Black',
+      price: '£3.00',
+      description: 'Smooth-writing metal pen with black ink.',
+      collection: 'Stationery',
+      imageUrl: 'assets/images/products/stationery/pen_metal_black_800.png',
+    ),
+    Product(
+      id: 'pencil_set_6',
+      title: 'Pencil Set (6)',
+      price: '£4.00',
+      description: 'Pack of 6 HB pencils in a neat box.',
+      collection: 'Stationery',
+      imageUrl: 'assets/images/products/stationery/pencil_set_6_800.png',
+    ),
+    Product(
+      id: 'stationery_pack_small',
+      title: 'Stationery Pack — Small',
+      price: '£12.00',
+      description: 'Starter stationery pack including notebook, pen and pencil set.',
+      collection: 'Stationery',
+      imageUrl: 'assets/images/products/stationery/stationery_pack_small_800.png',
+    ),
   ];
 
   List<Product> getAllProducts() => _products;
