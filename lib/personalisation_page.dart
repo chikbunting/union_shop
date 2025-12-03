@@ -106,12 +106,29 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                   height: 320,
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade300), color: Colors.white),
-                  child: Center(
-                    child: Text(
-                      _text.isEmpty ? 'Preview' : _text,
-                      style: TextStyle(fontSize: _fontSize, color: _color),
-                      textAlign: TextAlign.center,
-                    ),
+                  child: Stack(
+                    children: [
+                      // Hoodie mockup image (falls back to plain background if asset missing)
+                      Positioned.fill(
+                        child: Image.asset(
+                          'assets/images/p1.png',
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(color: Colors.grey[100]);
+                          },
+                        ),
+                      ),
+                      // Centered overlay text preview
+                      Positioned.fill(
+                        child: Center(
+                          child: Text(
+                            _text.isEmpty ? 'Preview' : _text,
+                            style: TextStyle(fontSize: _fontSize, color: _color, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
