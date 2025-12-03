@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/services/product_service.dart';
 
 class SalePage extends StatelessWidget {
   const SalePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final saleProducts = const [
-      {'title': 'Sale Magnet', 'price': '£5.00', 'old': '£10.00'},
-      {'title': 'Discounted Postcard', 'price': '£2.50', 'old': '£5.00'},
-      {'title': 'Sale Sticker', 'price': '£1.00', 'old': '£2.00'},
-    ];
+    // Show selected sale products (p1 and p5) with images
+    final saleProducts = [
+      ProductService.instance.getProductById('p1'),
+      ProductService.instance.getProductById('p5'),
+    ].where((p) => p != null).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -32,11 +33,18 @@ class SalePage extends StatelessWidget {
                 itemCount: saleProducts.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 8),
                 itemBuilder: (context, index) {
-                  final p = saleProducts[index];
+                  final p = saleProducts[index]!;
                   return ListTile(
-                    title: Text(p['title'] ?? ''),
-                    subtitle: Text('Was ${p['old']}'),
-                    trailing: Text(p['price'] ?? ''),
+                    leading: Image.asset(
+                      p.imageUrl ?? '',
+                      width: 72,
+                      height: 72,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => const Icon(Icons.image_not_supported),
+                    ),
+                    title: Text(p.title),
+                    subtitle: Text(p.description ?? ''),
+                    trailing: Text(p.price),
                   );
                 },
               ),
