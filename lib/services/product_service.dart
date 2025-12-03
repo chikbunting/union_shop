@@ -44,7 +44,7 @@ class ProductService {
       price: '£6.50',
       description: 'A durable A5 notebook with blue cover. 80 pages.',
       collection: 'Stationery',
-      imageUrl: 'assets/images/products/stationery/notebook_a5_blue_800.png',
+      imageUrl: 'assets/images/notebook_a5_blue_800.png',
     ),
     Product(
       id: 'pen_metal_black',
@@ -52,7 +52,7 @@ class ProductService {
       price: '£3.00',
       description: 'Smooth-writing metal pen with black ink.',
       collection: 'Stationery',
-      imageUrl: 'assets/images/products/stationery/pen_metal_black_800.png',
+      imageUrl: 'assets/images/pen_metal_black_800.png',
     ),
     Product(
       id: 'pencil_set_6',
@@ -60,7 +60,7 @@ class ProductService {
       price: '£4.00',
       description: 'Pack of 6 HB pencils in a neat box.',
       collection: 'Stationery',
-      imageUrl: 'assets/images/products/stationery/pencil_set_6_800.png',
+      imageUrl: 'assets/images/pencil_set_6_800.png',
     ),
     Product(
       id: 'stationery_pack_small',
@@ -68,7 +68,7 @@ class ProductService {
       price: '£12.00',
       description: 'Starter stationery pack including notebook, pen and pencil set.',
       collection: 'Stationery',
-      imageUrl: 'assets/images/products/stationery/stationery_pack_small_800.png',
+      imageUrl: 'assets/images/stationery_pack_small_800.png',
     ),
   ];
 
