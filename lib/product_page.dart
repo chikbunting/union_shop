@@ -3,6 +3,7 @@ import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/services/product_service.dart';
 import 'package:union_shop/models/product.dart';
 import 'package:union_shop/widgets/header.dart';
+import 'package:union_shop/widgets/footer.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -247,30 +248,7 @@ class _ProductPageState extends State<ProductPage> {
               ),
             ),
 
-            // Footer
-            Container(
-              width: double.infinity,
-              color: Colors.grey[50],
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Placeholder Footer',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Students should customise this footer section',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ],
-              ),
-            ),
+            const Footer(),
           ],
         ),
       ),

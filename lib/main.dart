@@ -7,6 +7,7 @@ import 'package:union_shop/auth_page.dart';
 import 'package:union_shop/cart_page.dart';
 import 'package:union_shop/search_page.dart';
 import 'package:union_shop/widgets/header.dart';
+import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/widgets/product_card.dart';
 import 'package:union_shop/services/product_service.dart';
 import 'package:union_shop/widgets/hero_banner.dart';
@@ -124,70 +125,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Footer
-            Container(
-              width: double.infinity,
-              color: const Color(0xFFF7F7F8),
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Wrap(
-                    spacing: 40,
-                    runSpacing: 16,
-                    children: const [
-                      SizedBox(
-                        width: 240,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Union Shop', style: TextStyle(fontWeight: FontWeight.bold)),
-                            SizedBox(height: 8),
-                            Text('Official student union store. Find merch, gifts and stationery.'),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 160,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Collections', style: TextStyle(fontWeight: FontWeight.bold)),
-                            SizedBox(height: 8),
-                            Text('Gifts'),
-                            Text('Stationery'),
-                            Text('Sale Items'),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 160,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Help', style: TextStyle(fontWeight: FontWeight.bold)),
-                            SizedBox(height: 8),
-                            Text('Contact'),
-                            Text('Delivery'),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('© ${2025} Union Shop', style: TextStyle(color: Colors.grey)),
-                      TextButton(
-                        onPressed: () => Navigator.pushNamed(context, '/search'),
-                        child: const Text('Search'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            const Footer(),
           ],
         ),
       ),
