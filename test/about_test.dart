@@ -9,7 +9,7 @@ void main() {
 
     expect(find.text('About Us'), findsWidgets);
     expect(
-      find.textContaining('This is a student implementation', findRichText: false),
+      find.textContaining('Welcome to the Union Shop', findRichText: false),
       findsOneWidget,
     );
   });
