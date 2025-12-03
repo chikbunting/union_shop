@@ -39,6 +39,22 @@ class ProductService {
     imageUrl: 'assets/images/p4.png',
     ),
     Product(
+      id: 'p5',
+      title: 'Placeholder Product 5',
+      price: '£18.00',
+      description: 'Additional placeholder product.',
+      collection: 'Gifts',
+      imageUrl: 'assets/images/p5.png',
+    ),
+    Product(
+      id: 'p6',
+      title: 'Placeholder Product 6',
+      price: '£22.00',
+      description: 'Additional placeholder product.',
+      collection: 'Gifts',
+      imageUrl: 'assets/images/p6.png',
+    ),
+    Product(
       id: 'notebook_a5_blue',
       title: 'A5 Notebook — Blue',
       price: '£6.50',
