@@ -5,7 +5,7 @@ class HeroBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void placeholderCallback() {}
+    void navigateToCollections() => Navigator.pushNamed(context, '/collections');
 
     return SizedBox(
       height: 420,
@@ -50,7 +50,7 @@ class HeroBanner extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 ElevatedButton(
-                  onPressed: placeholderCallback,
+                  onPressed: navigateToCollections,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4d2963),
                     foregroundColor: Colors.white,
@@ -61,7 +61,7 @@ class HeroBanner extends StatelessWidget {
                   child: const Text('BROWSE PRODUCTS', style: TextStyle(fontSize: 14, letterSpacing: 1)),
                 ),
                 const SizedBox(height: 8),
-                TextButton(onPressed: () {}, child: const Text('VIEW ALL PRODUCTS')),
+                TextButton(onPressed: navigateToCollections, child: const Text('VIEW ALL PRODUCTS')),
               ],
             ),
           ),
