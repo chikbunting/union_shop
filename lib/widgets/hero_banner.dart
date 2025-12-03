@@ -40,7 +40,7 @@ class HeroBanner extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  "This is placeholder text for the hero section.",
+                  "welcome to our shop! Discover unique products and exclusive deals just for you.",
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
