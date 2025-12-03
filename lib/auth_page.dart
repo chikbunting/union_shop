@@ -64,7 +64,27 @@ class _AuthPageState extends State<AuthPage> {
             const SizedBox(height: 16),
             ElevatedButton(onPressed: _loading ? null : _doSignIn, child: _loading ? const CircularProgressIndicator() : const Text('Sign In')),
             const SizedBox(height: 24),
+            const SizedBox(height: 12),
             const Divider(),
+            const SizedBox(height: 12),
+            ElevatedButton.icon(
+              onPressed: _loading
+                  ? null
+                  : () async {
+                      setState(() => _loading = true);
+                      final ok = await AuthService.instance.signInWithGoogle();
+                      setState(() => _loading = false);
+                      if (ok) {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Signed in with Google')));
+                        Navigator.pushNamedAndRemoveUntil(context, '/account', (r) => false);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Google sign-in failed or was cancelled')));
+                      }
+                    },
+              icon: const Icon(Icons.login),
+              label: const Text('Sign in with Google'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF4285F4)),
+            ),
             const SizedBox(height: 12),
             const Text('New here? Create an account', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             const SizedBox(height: 8),
