@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/services/auth_service.dart';
+
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
