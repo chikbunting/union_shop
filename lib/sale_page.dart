@@ -36,14 +36,14 @@ class SalePage extends StatelessWidget {
                   final p = saleProducts[index]!;
                   return ListTile(
                     leading: Image.asset(
-                      p.imageUrl ?? '',
+                      p.imageUrl,
                       width: 72,
                       height: 72,
                       fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) => const Icon(Icons.image_not_supported),
                     ),
                     title: Text(p.title),
-                    subtitle: Text(p.description ?? ''),
+                    subtitle: Text(p.description),
                     trailing: Text(p.price),
                   );
                 },
