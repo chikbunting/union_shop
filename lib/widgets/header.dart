@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/services/auth_service.dart';
 
 class Header extends StatelessWidget {
   const Header({super.key});
@@ -75,14 +76,18 @@ class Header extends StatelessWidget {
                 // Right icons
                 Row(
                   children: [
-                    IconButton(
-                          icon: const Icon(Icons.search, size: 20, color: Colors.grey),
-                          onPressed: () => Navigator.pushNamed(context, '/search'),
-                        ),
-                    IconButton(
-                      icon: const Icon(Icons.person_outline, size: 20, color: Colors.grey),
-                      onPressed: () => Navigator.pushNamed(context, '/auth'),
-                    ),
+                        IconButton(
+                              icon: const Icon(Icons.search, size: 20, color: Colors.grey),
+                              onPressed: () => Navigator.pushNamed(context, '/search'),
+                            ),
+                        Builder(builder: (ctx) {
+                          return IconButton(
+                            icon: const Icon(Icons.person_outline, size: 20, color: Colors.grey),
+                            onPressed: () {
+                              Navigator.pushNamed(context, AuthService.instance.currentUser == null ? '/auth' : '/account');
+                            },
+                          );
+                        }),
                     IconButton(
                       icon: const Icon(Icons.shopping_bag_outlined, size: 20, color: Colors.grey),
                       onPressed: () => Navigator.pushNamed(context, '/cart'),
