@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/widgets/header.dart';
 import 'package:union_shop/widgets/footer.dart';
 
 class PersonalisationPage extends StatefulWidget {
