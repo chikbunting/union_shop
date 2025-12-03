@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class UserProfile {
   String name;
@@ -108,5 +109,40 @@ class AuthService {
     _users[_currentUser!.email.toLowerCase()] = _currentUser!;
     await _saveToPrefs();
     return true;
+  }
+
+  /// Sign in using Google (OAuth) and create a local profile if needed.
+  /// Returns true when signed in successfully.
+  Future<bool> signInWithGoogle({String? webClientId}) async {
+    try {
+      final googleSignIn = GoogleSignIn(
+        // webClientId is optional; on web you may need to pass your OAuth client id
+        clientId: webClientId,
+        scopes: ['email', 'profile'],
+      );
+      final account = await googleSignIn.signIn();
+      if (account == null) return false; // user aborted
+      final email = account.email;
+      final name = account.displayName ?? email.split('@').first;
+      final key = email.toLowerCase();
+      if (!_users.containsKey(key)) {
+        // create a lightweight profile (password empty)
+        _users[key] = UserProfile(name: name, email: email, password: '');
+      }
+      _currentUser = _users[key];
+      await _saveToPrefs();
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Sign out from google (if previously signed in) and clear local session.
+  Future<void> signOutGoogle() async {
+    try {
+      final googleSignIn = GoogleSignIn();
+      await googleSignIn.signOut();
+    } catch (_) {}
+    await signOut();
   }
 }
