@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/services/cart_service.dart';
+import 'package:union_shop/models/product.dart';
 
 class PersonalisationPage extends StatefulWidget {
   const PersonalisationPage({super.key});
@@ -71,7 +73,30 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                         ],
                       ),
                       const SizedBox(height: 12),
-                      ElevatedButton(onPressed: () {}, child: const Text('Add to cart (demo)')),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Create a lightweight product for personalised prints
+                          final product = Product(
+                            id: 'personalised_print',
+                            title: 'Personalised Print',
+                            price: '£10.00',
+                            description: 'Custom personalised print',
+                            collection: 'personalisation',
+                            imageUrl: '',
+                          );
+
+                          CartService.instance.add(
+                            product,
+                            quantity: 1,
+                            personalisedText: _text,
+                            personalisedFontSize: _fontSize,
+                            personalisedTextColor: '#${_color.value.toRadixString(16).padLeft(8, '0')}',
+                          );
+
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Personalised item added to cart')));
+                        },
+                        child: const Text('Add to cart (demo)'),
+                      ),
                     ],
                   ),
                 ),

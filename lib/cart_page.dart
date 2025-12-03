@@ -34,7 +34,15 @@ class _CartPageState extends State<CartPage> {
                         final it = entry.value;
                         return ListTile(
                           title: Text(it.product.title),
-                          subtitle: Text('${it.size ?? ''} ${it.colour ?? ''}'),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if ((it.size ?? '').isNotEmpty || (it.colour ?? '').isNotEmpty)
+                                Text('${it.size ?? ''} ${it.colour ?? ''}'),
+                              if ((it.personalisedText ?? '').isNotEmpty)
+                                Text('Personalised: "${it.personalisedText}" (size ${it.personalisedFontSize?.toInt() ?? ''})', style: const TextStyle(fontStyle: FontStyle.italic)),
+                            ],
+                          ),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
