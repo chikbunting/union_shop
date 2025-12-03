@@ -21,17 +21,17 @@ void main() {
     await tester.pumpWidget(const UnionShopApp());
     await tester.pumpAndSettle();
 
-    // Tap first product title
-    final productFinder = find.text('Placeholder Product 1');
+    // Tap first product title (now named 'Signature Hoodie')
+    final productFinder = find.text('Signature Hoodie').at(0);
     expect(productFinder, findsOneWidget);
-  // scroll by dragging the SingleChildScrollView until the product is visible
-  await tester.drag(find.byType(SingleChildScrollView), const Offset(0, -600));
-  await tester.pumpAndSettle();
+    // scroll by dragging the SingleChildScrollView until the product is visible
+    await tester.drag(find.byType(SingleChildScrollView), const Offset(0, -600));
+    await tester.pumpAndSettle();
 
-  await tester.tap(productFinder);
+    await tester.tap(productFinder);
     await tester.pumpAndSettle();
 
     // Product page should show the product title from ProductService
-    expect(find.text('Placeholder Product 1'), findsOneWidget);
+    expect(find.text('Signature Hoodie'), findsOneWidget);
   });
 }
