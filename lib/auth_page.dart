@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/footer.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -50,6 +51,7 @@ class AuthPage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const Footer(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
+import 'package:union_shop/widgets/footer.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -79,6 +80,7 @@ class _CartPageState extends State<CartPage> {
           ],
         ),
       ),
+      bottomNavigationBar: const Footer(),
     );
   }
 }

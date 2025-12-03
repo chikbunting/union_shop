@@ -47,10 +47,9 @@ void main() {
     testWidgets('should display footer', (tester) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pump();
-
-      // Check that footer is present (product page footer uses placeholder text)
-      expect(find.text('Placeholder Footer'), findsOneWidget);
-      expect(find.text('Students should customise this footer section'), findsOneWidget);
+      // Check that footer is present
+      expect(find.text('© 2025 Union Shop'), findsOneWidget);
+      expect(find.text('Search'), findsOneWidget);
     });
   });
 }

@@ -7,7 +7,7 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: SalePage()));
     await tester.pumpAndSettle();
 
-    expect(find.text('Sale Items'), findsOneWidget);
+    expect(find.text('Sale Items'), findsWidgets);
     expect(find.text('Sale Magnet'), findsOneWidget);
     expect(find.text('£5.00'), findsOneWidget);
   });
