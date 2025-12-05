@@ -8,7 +8,7 @@ class SalePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Featured sale product ids
+  // Featured sale product ids
   const saleProductIds = ['p1', 'p5'];
 
     // legacy simple sale list (kept for tests / simple display)
