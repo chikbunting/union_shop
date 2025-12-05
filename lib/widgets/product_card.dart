@@ -30,20 +30,25 @@ class _ProductCardState extends State<ProductCard> {
     return MouseRegion(
       onEnter: (_) => _onEnter(true),
       onExit: (_) => _onEnter(false),
-      child: AnimatedScale(
-        duration: const Duration(milliseconds: 160),
-        scale: _hovered ? 1.01 : 1.0,
-        child: Card(
-          elevation: _hovered ? 8 : 3,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          clipBehavior: Clip.hardEdge,
-          child: Semantics(
-            // Expose the product card as a tappable button with a clear label for screen readers
-            button: true,
-            label: '${widget.title}, ${widget.price}',
-            child: InkWell(
-              onTap: () => Navigator.pushNamed(context, '/product', arguments: widget.productId),
-              child: LayoutBuilder(builder: (context, constraints) {
+      child: FocusableActionDetector(
+        onShowFocusHighlight: (focused) => setState(() => _hovered = focused),
+        child: AnimatedScale(
+          duration: const Duration(milliseconds: 160),
+          scale: _hovered ? 1.01 : 1.0,
+          child: Card(
+            elevation: _hovered ? 8 : 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: _hovered ? BorderSide(color: Theme.of(context).colorScheme.primary, width: 2) : BorderSide.none,
+            ),
+            clipBehavior: Clip.hardEdge,
+            child: Semantics(
+              // Expose the product card as a tappable button with a clear label for screen readers
+              button: true,
+              label: '${widget.title}, ${widget.price}',
+              child: InkWell(
+                onTap: () => Navigator.pushNamed(context, '/product', arguments: widget.productId),
+                child: LayoutBuilder(builder: (context, constraints) {
                 final cw = constraints.maxWidth;
                 final titleSize = cw > 240 ? 15.0 : 13.0;
                 return Column(
@@ -131,10 +136,11 @@ class _ProductCardState extends State<ProductCard> {
                 ],
               );
             }), // end LayoutBuilder
-          ), // end InkWell
-        ), // end Semantics
-      ), // end Card
-    ), // end AnimatedScale
-  ); // end MouseRegion
+                ), // end InkWell
+              ), // end Semantics
+            ), // end Card
+          ), // end AnimatedScale
+        ), // end FocusableActionDetector
+      ); // end MouseRegion
   }
 }

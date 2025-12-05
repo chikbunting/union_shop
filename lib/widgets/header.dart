@@ -36,32 +36,35 @@ class Header extends StatelessWidget {
                 Semantics(
                   button: true,
                   label: 'Union Shop home',
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: navigateToHome,
-                      child: Row(
-                        children: [
-                          Image.network(
-                            'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                            height: 48,
-                            width: 48,
-                            fit: BoxFit.cover,
-                            semanticLabel: 'Union Shop logo',
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                color: Colors.grey[300],
-                                width: 48,
-                                height: 48,
-                                child: const Center(
-                                  child: Icon(Icons.image_not_supported, color: Colors.grey),
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(width: 16),
-                          const Text('Union Shop', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        ],
+                  child: Tooltip(
+                    message: 'Home',
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: navigateToHome,
+                        child: Row(
+                          children: [
+                            Image.network(
+                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                              height: 48,
+                              width: 48,
+                              fit: BoxFit.cover,
+                              semanticLabel: 'Union Shop logo',
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: Colors.grey[300],
+                                  width: 48,
+                                  height: 48,
+                                  child: const Center(
+                                    child: Icon(Icons.image_not_supported, color: Colors.grey),
+                                  ),
+                                );
+                              },
+                            ),
+                            const SizedBox(width: 16),
+                            const Text('Union Shop', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          ],
+                        ),
                       ),
                     ),
                   ),

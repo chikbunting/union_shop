@@ -63,17 +63,20 @@ class HeroBanner extends StatelessWidget {
                 Semantics(
                   button: true,
                   label: 'Browse products',
-                  child: ElevatedButton(
-                    onPressed: navigateToCollections,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4d2963),
-                      foregroundColor: Colors.white,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minWidth: w > 600 ? 180 : 120),
+                    child: ElevatedButton(
+                      onPressed: navigateToCollections,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        foregroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: w > 600 ? 20 : 12, vertical: w > 600 ? 14 : 10),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: w > 600 ? 20 : 12, vertical: w > 600 ? 14 : 10),
+                      child: const Text('BROWSE PRODUCTS', style: TextStyle(fontSize: 14, letterSpacing: 1)),
                     ),
-                    child: const Text('BROWSE PRODUCTS', style: TextStyle(fontSize: 14, letterSpacing: 1)),
                   ),
                 ),
                 const SizedBox(height: 8),
