@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/main.dart';
+import 'package:union_shop/services/product_service.dart';
 
 void main() {
   group('Home Page Tests', () {
@@ -20,17 +21,12 @@ void main() {
       await tester.pumpWidget(const UnionShopApp());
       await tester.pump();
 
-      // Check that product cards are displayed
-      expect(find.text('Placeholder Product 1'), findsOneWidget);
-      expect(find.text('Placeholder Product 2'), findsOneWidget);
-      expect(find.text('Placeholder Product 3'), findsOneWidget);
-      expect(find.text('Placeholder Product 4'), findsOneWidget);
-
-      // Check prices are displayed
-      expect(find.text('£10.00'), findsOneWidget);
-      expect(find.text('£15.00'), findsOneWidget);
-      expect(find.text('£20.00'), findsOneWidget);
-      expect(find.text('£25.00'), findsOneWidget);
+      // Get the first four products from the service so tests don't hard-code copy
+      final products = ProductService.instance.getAllProducts().take(4).toList();
+      for (final p in products) {
+        expect(find.text(p.title), findsOneWidget);
+        expect(find.text(p.price), findsOneWidget);
+      }
     });
 
     testWidgets('should display header icons', (tester) async {
