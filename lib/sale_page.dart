@@ -9,7 +9,7 @@ class SalePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Featured sale product ids
-    final saleProductIds = ['p1', 'p5'];
+  const saleProductIds = ['p1', 'p5'];
 
     // legacy simple sale list (kept for tests / simple display)
     final saleProducts = const [
@@ -17,12 +17,7 @@ class SalePage extends StatelessWidget {
       {'title': 'Discounted Postcard', 'price': '£2.50', 'old': '£5.00'},
       {'title': 'Sale Sticker', 'price': '£1.00', 'old': '£2.00'},
     ];
-    final additionalSaleProducts = [
-      {'title': 'Hoodie', 'price': '£10.00', 'old': '£40.00'},
-      {'title': 'T-Shirt', 'price': '£5.00', 'old': '£20.00'},
-      
-      
-    ];
+    // additionalSaleProducts intentionally removed (legacy placeholders)
 
     return Scaffold(
       appBar: AppBar(

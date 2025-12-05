@@ -181,8 +181,8 @@ class _ProductPageState extends State<ProductPage> {
                             Expanded(
                               child: Semantics(
                                 label: 'Size selection. Current: $_selectedSize',
-                                child: DropdownButtonFormField<String>(
-                                  value: _selectedSize,
+                child: DropdownButtonFormField<String>(
+                  initialValue: _selectedSize,
                                   items: const [
                                     DropdownMenuItem(value: 'One Size', child: Text('One Size')),
                                     DropdownMenuItem(value: 'Small', child: Text('Small')),
@@ -199,7 +199,7 @@ class _ProductPageState extends State<ProductPage> {
                               child: Semantics(
                                 label: 'Colour selection. Current: $_selectedColour',
                                 child: DropdownButtonFormField<String>(
-                                  value: _selectedColour,
+                                  initialValue: _selectedColour,
                                   items: const [
                                     DropdownMenuItem(value: 'Black', child: Text('Black')),
                                     DropdownMenuItem(value: 'White', child: Text('White')),

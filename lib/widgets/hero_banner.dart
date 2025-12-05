@@ -23,7 +23,8 @@ class HeroBanner extends StatelessWidget {
               },
             ),
           ),
-          Positioned.fill(child: Container(color: Colors.black.withOpacity(0.6))),
+          // Use a const Color.fromRGBO to avoid deprecated withOpacity
+          Positioned.fill(child: Container(color: const Color.fromRGBO(0, 0, 0, 0.6))),
           Positioned(
             left: 24,
             right: 24,

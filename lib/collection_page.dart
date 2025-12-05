@@ -72,7 +72,7 @@ class _CollectionPageState extends State<CollectionPage> {
               children: [
                 Expanded(
                   child: DropdownButtonFormField<String>(
-                    value: _sortBy,
+                    initialValue: _sortBy,
                     items: const [
                       DropdownMenuItem(value: 'All', child: Text('All')),
                       DropdownMenuItem(value: 'Price: Low to High', child: Text('Price: Low to High')),
@@ -85,7 +85,7 @@ class _CollectionPageState extends State<CollectionPage> {
                 const SizedBox(width: 12),
                 Expanded(
                   child: DropdownButtonFormField<String>(
-                    value: _colour,
+                    initialValue: _colour,
                     items: const [
                       DropdownMenuItem(value: 'Any', child: Text('Any')),
                       DropdownMenuItem(value: 'Red', child: Text('Red')),

@@ -85,12 +85,15 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                             imageUrl: '',
                           );
 
+                          // Convert colour to ARGB hex without using deprecated `.value`
+                          final colourHex = '${_color.alpha.toRadixString(16).padLeft(2, '0')}${_color.red.toRadixString(16).padLeft(2, '0')}${_color.green.toRadixString(16).padLeft(2, '0')}${_color.blue.toRadixString(16).padLeft(2, '0')}';
+
                           CartService.instance.add(
                             product,
                             quantity: 1,
                             personalisedText: _text,
                             personalisedFontSize: _fontSize,
-                            personalisedTextColor: '#${_color.value.toRadixString(16).padLeft(8, '0')}',
+                            personalisedTextColor: '#$colourHex',
                           );
 
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Personalised item added to cart')));
