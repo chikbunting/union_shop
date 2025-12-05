@@ -43,6 +43,23 @@ Tests & grading checklist
 Contact / Notes
 
 If you'd like, I can add CI badges, screenshots, or a brief demo GIF to `docs/demo/` and finalize the submission.
+ 
+## Screenshots
+
+Below are a few demo screenshots of the app (placeholders included). Replace these with real screenshots from your local run if you prefer.
+
+Home (mobile view):
+
+![Home demo](docs/demo/home.svg)
+
+Product page (with personalisation preview):
+
+![Product demo](docs/demo/product.svg)
+
+Cart page (demo):
+
+![Cart demo](docs/demo/cart.svg)
+
 # Union Shop — Flutter Coursework
 
 This repository contains the coursework project for students enrolled in the **Programming Applications and Programming Languages (M30235)** and **User Experience Design and Implementation (M32605)** modules at the University of Portsmouth.
