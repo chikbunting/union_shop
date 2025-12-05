@@ -9,9 +9,10 @@ void main() {
       await tester.pumpWidget(const UnionShopApp());
       await tester.pump();
 
-      // Check that basic UI elements are present
-      expect(find.text('Union Shop — Official Student Union Store'), findsOneWidget);
-      expect(find.text('Placeholder Hero Title'), findsOneWidget);
+  // Check that basic UI elements are present
+  expect(find.text('Union Shop — Official Student Union Store'), findsOneWidget);
+  // HeroBanner text (updated copy)
+  expect(find.text('welcome to the union shop'), findsOneWidget);
       expect(find.text('Featured products'), findsOneWidget);
       expect(find.text('BROWSE PRODUCTS'), findsOneWidget);
       expect(find.text('VIEW ALL PRODUCTS'), findsOneWidget);
