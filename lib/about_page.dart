@@ -11,9 +11,9 @@ class AboutPage extends StatelessWidget {
         title: const Text('About Us'),
         backgroundColor: const Color(0xFF4d2963),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
+        body: const SingleChildScrollView(
+          padding: EdgeInsets.all(24),
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
             Text(

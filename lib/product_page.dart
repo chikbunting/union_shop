@@ -36,7 +36,7 @@ class _ProductPageState extends State<ProductPage> {
             collection: 'Demo',
             imageUrl: '',
           ))
-        : Product(
+          : const Product(
             id: 'p-demo',
             title: 'Placeholder Product Name',
             price: '£15.00',
@@ -77,7 +77,7 @@ class _ProductPageState extends State<ProductPage> {
                             collection: 'Demo',
                             imageUrl: '',
               ))
-                        : Product(
+              : const Product(
                             id: 'p-demo',
                             title: 'Placeholder Product Name',
                             price: '£15.00',
