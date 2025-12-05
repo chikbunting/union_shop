@@ -88,7 +88,9 @@ class HomeScreen extends StatelessWidget {
             Container(
               color: Colors.white,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 32),
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width > 900 ? 40.0 : 16.0,
+                    vertical: MediaQuery.of(context).size.width > 900 ? 32 : 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -102,31 +104,30 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: MediaQuery.of(context).size.width > 1200
-                          ? 4
-                          : MediaQuery.of(context).size.width > 900
-                              ? 3
-                              : MediaQuery.of(context).size.width > 600
-                                  ? 2
-                                  : 1,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      childAspectRatio: 0.78,
-                      // Featured products: first four products from ProductService
-                      children: ProductService.instance
-                          .getAllProducts()
-                          .take(4)
-                          .map((p) => ProductCard(
-                                productId: p.id,
-                                title: p.title,
-                                price: p.price,
-                                imageUrl: p.imageUrl,
-                              ))
-                          .toList(),
-                    ),
+                    Builder(builder: (context) {
+                      final w = MediaQuery.of(context).size.width;
+                      final cols = w > 1200 ? 4 : w > 900 ? 3 : w > 600 ? 2 : 1;
+                      final childAspect = w > 900 ? 0.78 : w > 600 ? 0.9 : 1.05;
+                      return GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: cols,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
+                        childAspectRatio: childAspect,
+                        // Featured products: first four products from ProductService
+                        children: ProductService.instance
+                            .getAllProducts()
+                            .take(4)
+                            .map((p) => ProductCard(
+                                  productId: p.id,
+                                  title: p.title,
+                                  price: p.price,
+                                  imageUrl: p.imageUrl,
+                                ))
+                            .toList(),
+                      );
+                    }),
                   ],
                 ),
               ),

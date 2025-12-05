@@ -110,28 +110,27 @@ class _CollectionPageState extends State<CollectionPage> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: GridView.count(
-                  shrinkWrap: false,
-                  crossAxisCount: MediaQuery.of(context).size.width > 1200
-                      ? 4
-                      : MediaQuery.of(context).size.width > 900
-                          ? 3
-                          : MediaQuery.of(context).size.width > 600
-                              ? 2
-                              : 1,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.75,
-                  padding: const EdgeInsets.all(4),
-                  children: products
-                      .map((p) => ProductCard(
-                            productId: p.id,
-                            title: p.title,
-                            price: p.price,
-                            imageUrl: p.imageUrl,
-                          ))
-                      .toList(),
-                ),
+                child: LayoutBuilder(builder: (context, constraints) {
+                  final w = constraints.maxWidth;
+                  final cols = w > 1200 ? 4 : w > 900 ? 3 : w > 600 ? 2 : 1;
+                  final childAspect = w > 900 ? 0.75 : w > 600 ? 0.85 : 1.05;
+                  return GridView.count(
+                    shrinkWrap: false,
+                    crossAxisCount: cols,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: childAspect,
+                    padding: const EdgeInsets.all(4),
+                    children: products
+                        .map((p) => ProductCard(
+                              productId: p.id,
+                              title: p.title,
+                              price: p.price,
+                              imageUrl: p.imageUrl,
+                            ))
+                        .toList(),
+                  );
+                }),
               ),
             ),
           ],
