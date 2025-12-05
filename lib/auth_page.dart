@@ -22,6 +22,7 @@ class _AuthPageState extends State<AuthPage> {
   Future<void> _doSignIn() async {
     setState(() => _loading = true);
     final ok = await AuthService.instance.signIn(email: _signInEmail.text.trim(), password: _signInPass.text);
+    if (!mounted) return;
     setState(() => _loading = false);
     if (ok) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Signed in')));
@@ -34,6 +35,7 @@ class _AuthPageState extends State<AuthPage> {
   Future<void> _doSignUp() async {
     setState(() => _loading = true);
     final ok = await AuthService.instance.signUp(name: _signUpName.text.trim(), email: _signUpEmail.text.trim(), password: _signUpPass.text);
+    if (!mounted) return;
     setState(() => _loading = false);
     if (ok) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Account created and signed in')));

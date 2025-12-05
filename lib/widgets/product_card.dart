@@ -30,9 +30,9 @@ class _ProductCardState extends State<ProductCard> {
     return MouseRegion(
       onEnter: (_) => _onEnter(true),
       onExit: (_) => _onEnter(false),
-      child: AnimatedContainer(
+      child: AnimatedScale(
         duration: const Duration(milliseconds: 160),
-        transform: _hovered ? (Matrix4.identity()..scale(1.01)) : Matrix4.identity(),
+        scale: _hovered ? 1.01 : 1.0,
         child: Card(
           elevation: _hovered ? 8 : 3,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

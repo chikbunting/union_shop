@@ -46,6 +46,7 @@ class _AccountPageState extends State<AccountPage> {
                   ElevatedButton(
                     onPressed: () async {
                       final ok = await AuthService.instance.updateProfile(name: _nameCtrl.text.trim(), email: _emailCtrl.text.trim());
+                      if (!mounted) return;
                       if (ok) {
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile updated')));
                         setState(() {});
@@ -65,6 +66,7 @@ class _AccountPageState extends State<AccountPage> {
                   ElevatedButton(
                     onPressed: () async {
                       final ok = await AuthService.instance.changePassword(oldPassword: _oldPassCtrl.text, newPassword: _newPassCtrl.text);
+                      if (!mounted) return;
                       if (ok) {
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Password changed')));
                         _oldPassCtrl.clear();
@@ -80,6 +82,7 @@ class _AccountPageState extends State<AccountPage> {
                       style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                       onPressed: () async {
                         await AuthService.instance.signOut();
+                        if (!mounted) return;
                         Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
                       },
                       child: const Text('Sign out')),
