@@ -1,3 +1,48 @@
+# Union Shop — Student Union Store (Coursework)
+
+This is a Flutter project that demonstrates a small student union web/shop application. It includes product browsing, personalisation, a cart with persistence, and a demo authentication flow.
+
+## Quick start
+
+Requirements
+- Flutter (stable) installed — see https://flutter.dev/docs/get-started/install
+- Recommended: macOS/Linux/Windows with Flutter tooling
+
+Run locally
+
+```bash
+flutter pub get
+flutter run -d chrome
+```
+
+Run tests
+
+```bash
+flutter test
+```
+
+CI
+
+This repository includes a GitHub Actions workflow at `.github/workflows/flutter-ci.yml` which runs `flutter analyze` and `flutter test` on pushes and pull requests to `main`.
+
+Demo / Auth notes
+
+- The app includes a demo/local `AuthService` for coursework so the project can be run without external configuration.
+- Google sign-in is scaffolded; see `docs/GOOGLE_SIGNIN.md` for steps to configure OAuth client IDs if you want to enable it.
+
+What to change for production
+
+- Replace the demo auth with a production authentication provider (e.g., Firebase Authentication).
+- Securely store secrets (do not commit OAuth client secrets).
+
+Tests & grading checklist
+
+- Ensure `flutter test` passes locally.
+- Add screenshots to `docs/demo/` if required by your submission.
+
+Contact / Notes
+
+If you'd like, I can add CI badges, screenshots, or a brief demo GIF to `docs/demo/` and finalize the submission.
 # Union Shop — Flutter Coursework
 
 This repository contains the coursework project for students enrolled in the **Programming Applications and Programming Languages (M30235)** and **User Experience Design and Implementation (M32605)** modules at the University of Portsmouth.
