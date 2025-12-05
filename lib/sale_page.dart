@@ -12,7 +12,7 @@ class SalePage extends StatelessWidget {
   const saleProductIds = ['p1', 'p5'];
 
     // legacy simple sale list (kept for tests / simple display)
-    final saleProducts = const [
+    const saleProducts = [
       {'title': 'Sale Magnet', 'price': '£5.00', 'old': '£10.00'},
       {'title': 'Discounted Postcard', 'price': '£2.50', 'old': '£5.00'},
       {'title': 'Sale Sticker', 'price': '£1.00', 'old': '£2.00'},

@@ -28,7 +28,7 @@ class _ProductPageState extends State<ProductPage> {
   void _addToCart() {
     final routeArg = ModalRoute.of(context)?.settings.arguments;
     final product = (routeArg is String)
-        ? (ProductService.instance.getProductById(routeArg) ?? Product(
+        ? (ProductService.instance.getProductById(routeArg) ?? const Product(
             id: 'p-demo',
             title: 'Placeholder Product Name',
             price: '£15.00',
@@ -69,14 +69,14 @@ class _ProductPageState extends State<ProductPage> {
                   Builder(builder: (context) {
                     final routeArg = ModalRoute.of(context)?.settings.arguments;
                     final product = (routeArg is String)
-                        ? (ProductService.instance.getProductById(routeArg) ?? Product(
+            ? (ProductService.instance.getProductById(routeArg) ?? const Product(
                             id: 'p-demo',
                             title: 'Placeholder Product Name',
                             price: '£15.00',
                             description: 'Demo product',
                             collection: 'Demo',
                             imageUrl: '',
-                          ))
+              ))
                         : Product(
                             id: 'p-demo',
                             title: 'Placeholder Product Name',
@@ -84,7 +84,7 @@ class _ProductPageState extends State<ProductPage> {
                             description: 'Demo product',
                             collection: 'Demo',
                             imageUrl: '',
-                          );
+              );
 
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -86,7 +86,12 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                           );
 
                           // Convert colour to ARGB hex without using deprecated `.value`
-                          final colourHex = '${_color.alpha.toRadixString(16).padLeft(2, '0')}${_color.red.toRadixString(16).padLeft(2, '0')}${_color.green.toRadixString(16).padLeft(2, '0')}${_color.blue.toRadixString(16).padLeft(2, '0')}';
+                          // Use recommended component accessors and convert to 0-255 ints
+                          final a = (_color.a * 255.0).round() & 0xff;
+                          final r = (_color.r * 255.0).round() & 0xff;
+                          final g = (_color.g * 255.0).round() & 0xff;
+                          final b = (_color.b * 255.0).round() & 0xff;
+                          final colourHex = '${a.toRadixString(16).padLeft(2, '0')}${r.toRadixString(16).padLeft(2, '0')}${g.toRadixString(16).padLeft(2, '0')}${b.toRadixString(16).padLeft(2, '0')}';
 
                           CartService.instance.add(
                             product,

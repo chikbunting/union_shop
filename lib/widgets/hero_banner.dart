@@ -34,7 +34,7 @@ class HeroBanner extends StatelessWidget {
                 children: [
                 Semantics(
                   header: true,
-                  child: Text(
+                  child: const Text(
                     'welcome to the union shop',
                     style: TextStyle(
                       fontSize: 28,
