@@ -82,15 +82,23 @@ class Footer extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('© 2025 Union Shop', style: TextStyle(color: Colors.grey)),
-              Row(
                 children: [
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.facebook, color: Colors.grey)),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.share, color: Colors.grey)),
+                  const Text('© 2025 Union Shop', style: TextStyle(color: Colors.grey)),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.facebook, color: Colors.grey),
+                        tooltip: 'Open Facebook',
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.share, color: Colors.grey),
+                        tooltip: 'Share',
+                      ),
+                    ],
+                  )
                 ],
-              )
-            ],
           ),
         ],
       ),

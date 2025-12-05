@@ -16,6 +16,8 @@ class HeroBanner extends StatelessWidget {
             child: Image.asset(
               'assets/images/hero_banner.png',
               fit: BoxFit.cover,
+              // Decorative background image — excluded from semantics
+              excludeFromSemantics: true,
               errorBuilder: (context, error, stackTrace) {
                 return Container(color: Colors.grey[300]);
               },
@@ -28,14 +30,17 @@ class HeroBanner extends StatelessWidget {
             top: 80,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  'welcome to the union shop',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    height: 1.2,
+                children: [
+                Semantics(
+                  header: true,
+                  child: Text(
+                    'welcome to the union shop',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      height: 1.2,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -49,19 +54,27 @@ class HeroBanner extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 32),
-                ElevatedButton(
-                  onPressed: navigateToCollections,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4d2963),
-                    foregroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
+                Semantics(
+                  button: true,
+                  label: 'Browse products',
+                  child: ElevatedButton(
+                    onPressed: navigateToCollections,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF4d2963),
+                      foregroundColor: Colors.white,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                      ),
                     ),
+                    child: const Text('BROWSE PRODUCTS', style: TextStyle(fontSize: 14, letterSpacing: 1)),
                   ),
-                  child: const Text('BROWSE PRODUCTS', style: TextStyle(fontSize: 14, letterSpacing: 1)),
                 ),
                 const SizedBox(height: 8),
-                TextButton(onPressed: navigateToCollections, child: const Text('VIEW ALL PRODUCTS')),
+                Semantics(
+                  button: true,
+                  label: 'View all products',
+                  child: TextButton(onPressed: navigateToCollections, child: const Text('VIEW ALL PRODUCTS')),
+                ),
               ],
             ),
           ),
