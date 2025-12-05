@@ -7,7 +7,7 @@ void main() {
     final cart = CartService.instance;
     cart.clear();
 
-    final p = const Product(
+    const p = Product(
       id: 't1',
       title: 'Test Product',
       price: '£2.50',

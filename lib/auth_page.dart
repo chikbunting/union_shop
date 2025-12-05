@@ -75,6 +75,7 @@ class _AuthPageState extends State<AuthPage> {
                   : () async {
                       setState(() => _loading = true);
                       final ok = await AuthService.instance.signInWithGoogle();
+                      if (!mounted) return;
                       setState(() => _loading = false);
                       if (ok) {
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Signed in with Google')));
