@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/services/auth_service.dart';
+import 'package:union_shop/widgets/app_drawer.dart';
 
 
 class AuthPage extends StatefulWidget {
@@ -27,7 +28,6 @@ class _AuthPageState extends State<AuthPage> {
     if (ok) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Signed in')));
       Navigator.pushNamedAndRemoveUntil(context, '/account', (r) => false);
-    import 'package:union_shop/widgets/app_drawer.dart';
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sign in failed')));
     }
@@ -49,6 +49,7 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(
         title: const Text('Sign In / Sign Up'),
         backgroundColor: const Color(0xFF4d2963),
@@ -71,11 +72,10 @@ class _AuthPageState extends State<AuthPage> {
             const Divider(),
             const SizedBox(height: 12),
             ElevatedButton.icon(
-              onPressed: _loading
-                  ? null
-                  : () async {
-          drawer: const AppDrawer(),
-                      setState(() => _loading = true);
+        onPressed: _loading
+          ? null
+          : () async {
+            setState(() => _loading = true);
                       final ok = await AuthService.instance.signInWithGoogle();
                       if (!mounted) return;
                       setState(() => _loading = false);
