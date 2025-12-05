@@ -101,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                         letterSpacing: 0.5,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
                     GridView.count(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -112,20 +112,20 @@ class HomeScreen extends StatelessWidget {
                               : MediaQuery.of(context).size.width > 600
                                   ? 2
                                   : 1,
-                      crossAxisSpacing: 24,
-                      mainAxisSpacing: 24,
-                      childAspectRatio: 0.75,
-                        // Featured products: first four products from ProductService
-                        children: ProductService.instance
-                            .getAllProducts()
-                            .take(4)
-                            .map((p) => ProductCard(
-                                  productId: p.id,
-                                  title: p.title,
-                                  price: p.price,
-                                  imageUrl: p.imageUrl,
-                                ))
-                            .toList(),
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      childAspectRatio: 0.78,
+                      // Featured products: first four products from ProductService
+                      children: ProductService.instance
+                          .getAllProducts()
+                          .take(4)
+                          .map((p) => ProductCard(
+                                productId: p.id,
+                                title: p.title,
+                                price: p.price,
+                                imageUrl: p.imageUrl,
+                              ))
+                          .toList(),
                     ),
                   ],
                 ),

@@ -34,7 +34,8 @@ class _ProductCardState extends State<ProductCard> {
         duration: const Duration(milliseconds: 160),
         transform: _hovered ? (Matrix4.identity()..scale(1.01)) : Matrix4.identity(),
         child: Card(
-          elevation: _hovered ? 6 : 2,
+          elevation: _hovered ? 8 : 3,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           clipBehavior: Clip.hardEdge,
           child: Semantics(
             // Expose the product card as a tappable button with a clear label for screen readers
@@ -103,7 +104,7 @@ class _ProductCardState extends State<ProductCard> {
                             ),
                             child: Text(
                               widget.title,
-                              style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                              style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),

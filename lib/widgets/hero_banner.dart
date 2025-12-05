@@ -8,7 +8,7 @@ class HeroBanner extends StatelessWidget {
     void navigateToCollections() => Navigator.pushNamed(context, '/collections');
 
     return SizedBox(
-      height: 420,
+      height: 360,
       width: double.infinity,
       child: Stack(
         children: [
@@ -36,7 +36,7 @@ class HeroBanner extends StatelessWidget {
                   child: Text(
                     'welcome to the union shop',
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       height: 1.2,

@@ -25,8 +25,8 @@ class Header extends StatelessWidget {
             ),
           ),
           // Main header row
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
             child: Row(
               children: [
                 Semantics(
@@ -53,7 +53,7 @@ class Header extends StatelessWidget {
                             );
                           },
                         ),
-                        const SizedBox(width: 14),
+                          const SizedBox(width: 16),
                         const Text('Union Shop', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                       ],
                     ),
