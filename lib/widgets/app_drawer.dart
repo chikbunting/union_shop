@@ -10,8 +10,8 @@ class AppDrawer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(color: Color(0xFF4d2963)),
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Color(0xFF4d2963)),
               child: Row(
                 children: const [
                   FlutterLogo(size: 40),
