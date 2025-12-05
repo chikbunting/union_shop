@@ -26,7 +26,8 @@ void main() {
       final products = ProductService.instance.getAllProducts().take(4).toList();
       for (final p in products) {
         expect(find.text(p.title), findsOneWidget);
-        expect(find.text(p.price), findsOneWidget);
+        // multiple products may share a price (e.g. £25.00), so assert at least one match
+        expect(find.text(p.price), findsWidgets);
       }
     });
 
