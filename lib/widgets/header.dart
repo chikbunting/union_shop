@@ -29,29 +29,34 @@ class Header extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             child: Row(
               children: [
-                GestureDetector(
-                  onTap: navigateToHome,
-                  child: Row(
-                    children: [
-                      Image.network(
-                        'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                        height: 42,
-                        width: 42,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: Colors.grey[300],
-                            width: 42,
-                            height: 42,
-                            child: const Center(
-                              child: Icon(Icons.image_not_supported, color: Colors.grey),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(width: 12),
-                      const Text('Union Shop', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                    ],
+                Semantics(
+                  button: true,
+                  label: 'Union Shop home',
+                  child: GestureDetector(
+                    onTap: navigateToHome,
+                    child: Row(
+                      children: [
+                        Image.network(
+                          'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                          height: 42,
+                          width: 42,
+                          fit: BoxFit.cover,
+                          semanticLabel: 'Union Shop logo',
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey[300],
+                              width: 42,
+                              height: 42,
+                              child: const Center(
+                                child: Icon(Icons.image_not_supported, color: Colors.grey),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(width: 12),
+                        const Text('Union Shop', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
                   ),
                 ),
 
@@ -61,12 +66,12 @@ class Header extends StatelessWidget {
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width > 800 ? 500 : 0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(onPressed: navigateToCollections, child: const Text('Shop')),
-                      TextButton(onPressed: () => Navigator.pushNamed(context, '/sale'), child: const Text('Sale')),
-                      TextButton(onPressed: () => Navigator.pushNamed(context, '/personalisation'), child: const Text('Personalisation')),
-                      TextButton(onPressed: () => Navigator.pushNamed(context, '/about'), child: const Text('About')),
+                      Tooltip(message: 'Shop', child: TextButton(onPressed: navigateToCollections, child: const Text('Shop'))),
+                      Tooltip(message: 'Sale items', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/sale'), child: const Text('Sale'))),
+                      Tooltip(message: 'Personalisation', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/personalisation'), child: const Text('Personalisation'))),
+                      Tooltip(message: 'About', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/about'), child: const Text('About'))),
                     ],
                   ),
                 ),
@@ -76,20 +81,23 @@ class Header extends StatelessWidget {
                 // Right icons
                 Row(
                   children: [
-                        IconButton(
-                              icon: const Icon(Icons.search, size: 20, color: Colors.grey),
-                              onPressed: () => Navigator.pushNamed(context, '/search'),
-                            ),
-                        Builder(builder: (ctx) {
-                          return IconButton(
-                            icon: const Icon(Icons.person_outline, size: 20, color: Colors.grey),
-                            onPressed: () {
-                              Navigator.pushNamed(context, AuthService.instance.currentUser == null ? '/auth' : '/account');
-                            },
-                          );
-                        }),
+                    IconButton(
+                      icon: const Icon(Icons.search, size: 20, color: Colors.grey),
+                      tooltip: 'Search',
+                      onPressed: () => Navigator.pushNamed(context, '/search'),
+                    ),
+                    Builder(builder: (ctx) {
+                      return IconButton(
+                        icon: const Icon(Icons.person_outline, size: 20, color: Colors.grey),
+                        tooltip: AuthService.instance.currentUser == null ? 'Sign in' : 'Account',
+                        onPressed: () {
+                          Navigator.pushNamed(context, AuthService.instance.currentUser == null ? '/auth' : '/account');
+                        },
+                      );
+                    }),
                     IconButton(
                       icon: const Icon(Icons.shopping_bag_outlined, size: 20, color: Colors.grey),
+                      tooltip: 'Cart',
                       onPressed: () => Navigator.pushNamed(context, '/cart'),
                     ),
                   ],
