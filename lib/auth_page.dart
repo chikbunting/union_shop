@@ -25,11 +25,13 @@ class _AuthPageState extends State<AuthPage> {
     final ok = await AuthService.instance.signIn(email: _signInEmail.text.trim(), password: _signInPass.text);
     if (!mounted) return;
     setState(() => _loading = false);
+    final messenger = ScaffoldMessenger.of(context);
+    final navigator = Navigator.of(context);
     if (ok) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Signed in')));
-      Navigator.pushNamedAndRemoveUntil(context, '/account', (r) => false);
+      messenger.showSnackBar(const SnackBar(content: Text('Signed in')));
+      navigator.pushNamedAndRemoveUntil('/account', (r) => false);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sign in failed')));
+      messenger.showSnackBar(const SnackBar(content: Text('Sign in failed')));
     }
   }
 
@@ -38,11 +40,13 @@ class _AuthPageState extends State<AuthPage> {
     final ok = await AuthService.instance.signUp(name: _signUpName.text.trim(), email: _signUpEmail.text.trim(), password: _signUpPass.text);
     if (!mounted) return;
     setState(() => _loading = false);
+    final messenger = ScaffoldMessenger.of(context);
+    final navigator = Navigator.of(context);
     if (ok) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Account created and signed in')));
-      Navigator.pushNamedAndRemoveUntil(context, '/account', (r) => false);
+      messenger.showSnackBar(const SnackBar(content: Text('Account created and signed in')));
+      navigator.pushNamedAndRemoveUntil('/account', (r) => false);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Account already exists')));
+      messenger.showSnackBar(const SnackBar(content: Text('Account already exists')));
     }
   }
 
@@ -76,15 +80,17 @@ class _AuthPageState extends State<AuthPage> {
           ? null
           : () async {
             setState(() => _loading = true);
-                      final ok = await AuthService.instance.signInWithGoogle();
-                      if (!mounted) return;
-                      setState(() => _loading = false);
-                      if (ok) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Signed in with Google')));
-                        Navigator.pushNamedAndRemoveUntil(context, '/account', (r) => false);
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Google sign-in failed or was cancelled')));
-                      }
+            final ok = await AuthService.instance.signInWithGoogle();
+            if (!mounted) return;
+            setState(() => _loading = false);
+            final messenger = ScaffoldMessenger.of(context);
+            final navigator = Navigator.of(context);
+            if (ok) {
+              messenger.showSnackBar(const SnackBar(content: Text('Signed in with Google')));
+              navigator.pushNamedAndRemoveUntil('/account', (r) => false);
+            } else {
+              messenger.showSnackBar(const SnackBar(content: Text('Google sign-in failed or was cancelled')));
+            }
                     },
               icon: const Icon(Icons.login),
               label: const Text('Sign in with Google'),
