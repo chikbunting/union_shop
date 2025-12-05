@@ -41,21 +41,33 @@ class Footer extends StatelessWidget {
                     children: [
                       const Text('Collections', style: TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8),
-                      TextButton(
-                        onPressed: () => Navigator.pushNamed(context, '/collections'),
-                        child: const Align(alignment: Alignment.centerLeft, child: Text('Shop')),
+                      Tooltip(
+                        message: 'Shop',
+                        child: TextButton(
+                          onPressed: () => Navigator.pushNamed(context, '/collections'),
+                          child: const Align(alignment: Alignment.centerLeft, child: Text('Shop')),
+                        ),
                       ),
-                      TextButton(
-                        onPressed: () => Navigator.pushNamed(context, '/personalisation'),
-                        child: const Align(alignment: Alignment.centerLeft, child: Text('Personalisation')),
+                      Tooltip(
+                        message: 'Personalisation',
+                        child: TextButton(
+                          onPressed: () => Navigator.pushNamed(context, '/personalisation'),
+                          child: const Align(alignment: Alignment.centerLeft, child: Text('Personalisation')),
+                        ),
                       ),
-                      TextButton(
-                        onPressed: () => Navigator.pushNamed(context, '/sale'),
-                        child: const Align(alignment: Alignment.centerLeft, child: Text('Sale Items')),
+                      Tooltip(
+                        message: 'Sale Items',
+                        child: TextButton(
+                          onPressed: () => Navigator.pushNamed(context, '/sale'),
+                          child: const Align(alignment: Alignment.centerLeft, child: Text('Sale Items')),
+                        ),
                       ),
-                      TextButton(
-                        onPressed: () => Navigator.pushNamed(context, '/search'),
-                        child: const Align(alignment: Alignment.centerLeft, child: Text('Search')),
+                      Tooltip(
+                        message: 'Search',
+                        child: TextButton(
+                          onPressed: () => Navigator.pushNamed(context, '/search'),
+                          child: const Align(alignment: Alignment.centerLeft, child: Text('Search')),
+                        ),
                       ),
                     ],
                   ),

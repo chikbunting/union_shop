@@ -76,7 +76,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                       ElevatedButton(
                         onPressed: () {
                           // Create a lightweight product for personalised prints
-                          final product = Product(
+                            const product = Product(
                             id: 'personalised_print',
                             title: 'Personalised Print',
                             price: '£10.00',
