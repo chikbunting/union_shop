@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/widgets/app_drawer.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -17,6 +18,7 @@ class _CartPageState extends State<CartPage> {
     final itemsMap = CartService.instance.itemsMap;
     final entries = itemsMap.entries.toList();
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(title: const Text('Cart'), backgroundColor: const Color(0xFF4d2963)),
       body: Padding(
         padding: const EdgeInsets.all(16),

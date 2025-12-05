@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/widgets/app_drawer.dart';
 import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/models/product.dart';
 
@@ -18,6 +19,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(title: const Text('Personalisation'), backgroundColor: const Color(0xFF4d2963)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

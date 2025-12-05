@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/widgets/app_drawer.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -7,6 +8,7 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(
         title: const Text('About Us'),
         backgroundColor: const Color(0xFF4d2963),

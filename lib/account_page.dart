@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/auth_service.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/widgets/app_drawer.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -29,6 +30,7 @@ class _AccountPageState extends State<AccountPage> {
   Widget build(BuildContext context) {
     final user = AuthService.instance.currentUser;
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(title: const Text('Account'), backgroundColor: const Color(0xFF4d2963)),
       body: user == null
           ? Center(child: Column(mainAxisSize: MainAxisSize.min, children: [const Text('Not signed in'), ElevatedButton(onPressed: () => Navigator.pushNamed(context, '/auth'), child: const Text('Sign in'))]))

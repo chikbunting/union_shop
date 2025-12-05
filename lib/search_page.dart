@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/services/product_service.dart';
 import 'package:union_shop/widgets/product_card.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/widgets/app_drawer.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -45,6 +46,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(title: const Text('Search'), backgroundColor: const Color(0xFF4d2963)),
       body: Padding(
         padding: const EdgeInsets.all(16),

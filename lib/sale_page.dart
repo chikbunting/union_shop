@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/services/product_service.dart';
 import 'package:union_shop/widgets/product_card.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/widgets/app_drawer.dart';
 
 class SalePage extends StatelessWidget {
   const SalePage({super.key});
@@ -20,6 +21,7 @@ class SalePage extends StatelessWidget {
     // additionalSaleProducts intentionally removed (legacy placeholders)
 
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(
         title: const Text('Sale'),
         backgroundColor: const Color(0xFF4d2963),
