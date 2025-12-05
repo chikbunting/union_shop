@@ -9,6 +9,10 @@ class Header extends StatelessWidget {
     void navigateToHome() => Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
     void navigateToCollections() => Navigator.pushNamed(context, '/collections');
 
+    final w = MediaQuery.of(context).size.width;
+    final horizontalPadding = w > 900 ? 32.0 : 16.0;
+    final verticalPadding = w > 900 ? 20.0 : 12.0;
+
     return Container(
       color: Colors.white,
       child: Column(
@@ -26,7 +30,7 @@ class Header extends StatelessWidget {
           ),
           // Main header row
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
             child: Row(
               children: [
                 Semantics(

@@ -20,11 +20,11 @@ class Footer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: isNarrow ? double.infinity : 260,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                  SizedBox(
+                    width: isNarrow ? double.infinity : 260,
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                       Text('Union Shop', style: TextStyle(fontWeight: FontWeight.bold)),
                       SizedBox(height: 8),
                       Text('Official student union store. Find merch, gifts and stationery.'),

@@ -43,9 +43,12 @@ class _ProductCardState extends State<ProductCard> {
             label: '${widget.title}, ${widget.price}',
             child: InkWell(
               onTap: () => Navigator.pushNamed(context, '/product', arguments: widget.productId),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+              child: LayoutBuilder(builder: (context, constraints) {
+                final cw = constraints.maxWidth;
+                final titleSize = cw > 240 ? 15.0 : 13.0;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                   // image area with overlay title and price
                   AspectRatio(
                     aspectRatio: 1,
@@ -104,7 +107,7 @@ class _ProductCardState extends State<ProductCard> {
                             ),
                             child: Text(
                               widget.title,
-                              style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(color: Colors.white, fontSize: titleSize, fontWeight: FontWeight.w600),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -126,11 +129,12 @@ class _ProductCardState extends State<ProductCard> {
                   // small padding area to keep card balanced
                   const SizedBox(height: 12),
                 ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+              );
+            }), // end LayoutBuilder
+          ), // end InkWell
+        ), // end Semantics
+      ), // end Card
+    ), // end AnimatedScale
+  ); // end MouseRegion
   }
 }

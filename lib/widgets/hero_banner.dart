@@ -7,8 +7,13 @@ class HeroBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     void navigateToCollections() => Navigator.pushNamed(context, '/collections');
 
+    final w = MediaQuery.of(context).size.width;
+    final height = w > 900 ? 360.0 : w > 600 ? 300.0 : 220.0;
+    final titleSize = w > 900 ? 28.0 : w > 600 ? 24.0 : 18.0;
+    final subtitleSize = w > 900 ? 20.0 : w > 600 ? 18.0 : 14.0;
+
     return SizedBox(
-      height: 360,
+      height: height,
       width: double.infinity,
       child: Stack(
         children: [
@@ -28,33 +33,33 @@ class HeroBanner extends StatelessWidget {
           Positioned(
             left: 24,
             right: 24,
-            top: 80,
+            top: height * 0.18,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                 Semantics(
                   header: true,
-                  child: const Text(
+                  child: Text(
                     'welcome to the union shop',
                     style: TextStyle(
-                      fontSize: 28,
+                      fontSize: titleSize,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       height: 1.2,
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                const Text(
+                SizedBox(height: titleSize > 20 ? 16 : 8),
+                Text(
                   "where student life begins",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: subtitleSize,
                     color: Colors.white,
                     height: 1.5,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: subtitleSize > 16 ? 28 : 12),
                 Semantics(
                   button: true,
                   label: 'Browse products',
@@ -66,6 +71,7 @@ class HeroBanner extends StatelessWidget {
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.zero,
                       ),
+                      padding: EdgeInsets.symmetric(horizontal: w > 600 ? 20 : 12, vertical: w > 600 ? 14 : 10),
                     ),
                     child: const Text('BROWSE PRODUCTS', style: TextStyle(fontSize: 14, letterSpacing: 1)),
                   ),

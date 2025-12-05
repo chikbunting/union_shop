@@ -15,7 +15,7 @@ class AboutPage extends StatelessWidget {
           padding: EdgeInsets.all(24),
           child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             Text(
               'About Us',
               style: TextStyle(
