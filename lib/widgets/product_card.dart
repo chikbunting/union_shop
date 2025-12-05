@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ProductCard extends StatefulWidget {
   final String productId;
@@ -32,6 +33,17 @@ class _ProductCardState extends State<ProductCard> {
       onExit: (_) => _onEnter(false),
       child: FocusableActionDetector(
         onShowFocusHighlight: (focused) => setState(() => _hovered = focused),
+        onFocusChange: (focused) => setState(() => _hovered = focused),
+        shortcuts: const <ShortcutActivator, Intent>{
+          SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+          SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+        },
+        actions: <Type, Action<Intent>>{
+          ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (intent) {
+            Navigator.pushNamed(context, '/product', arguments: widget.productId);
+            return null;
+          }),
+        },
         child: AnimatedScale(
           duration: const Duration(milliseconds: 160),
           scale: _hovered ? 1.01 : 1.0,

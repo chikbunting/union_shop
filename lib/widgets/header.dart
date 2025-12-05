@@ -72,19 +72,21 @@ class Header extends StatelessWidget {
 
                 const Spacer(),
 
-                // Center nav links
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width > 800 ? 500 : 0),
-                  child: Row(
+                // Center nav links (hidden on very small widths)
+                w > 700
+                    ? ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width > 800 ? 500 : 0),
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Tooltip(message: 'Shop', child: TextButton(onPressed: navigateToCollections, child: const Text('Shop', style: TextStyle(fontSize: 16)))),
-                          Tooltip(message: 'Sale items', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/sale'), child: const Text('Sale', style: TextStyle(fontSize: 16)))),
-                          Tooltip(message: 'Personalisation', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/personalisation'), child: const Text('Personalisation', style: TextStyle(fontSize: 16)))),
-                          Tooltip(message: 'About', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/about'), child: const Text('About', style: TextStyle(fontSize: 16)))),
-                        ],
-                  ),
-                ),
+                          children: [
+                            Tooltip(message: 'Shop', child: TextButton(onPressed: navigateToCollections, child: const Text('Shop', style: TextStyle(fontSize: 16)))),
+                            Tooltip(message: 'Sale items', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/sale'), child: const Text('Sale', style: TextStyle(fontSize: 16)))),
+                            Tooltip(message: 'Personalisation', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/personalisation'), child: const Text('Personalisation', style: TextStyle(fontSize: 16)))),
+                            Tooltip(message: 'About', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/about'), child: const Text('About', style: TextStyle(fontSize: 16)))),
+                          ],
+                        ),
+                      )
+                    : const SizedBox.shrink(),
 
                 const Spacer(),
 
