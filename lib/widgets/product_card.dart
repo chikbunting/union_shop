@@ -48,6 +48,7 @@ class _ProductCardState extends State<ProductCard> {
           duration: const Duration(milliseconds: 160),
           scale: _hovered ? 1.01 : 1.0,
           child: Card(
+            key: Key('product-${widget.productId}'),
             elevation: _hovered ? 8 : 3,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),

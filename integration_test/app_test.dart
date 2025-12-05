@@ -10,21 +10,21 @@ void main() {
     app.main();
     await tester.pumpAndSettle();
 
-    // Ensure home loaded and featured product is visible
-    final productFinder = find.text('Signature Hoodie');
-    expect(productFinder, findsOneWidget);
+  // Ensure home loaded and featured product is visible (use stable Key)
+  final productFinder = find.byKey(const Key('product-p1'));
+  expect(productFinder, findsOneWidget);
 
-    // Tap the product to open product page
-    await tester.tap(productFinder);
+  // Tap the product to open product page
+  await tester.tap(productFinder);
     await tester.pumpAndSettle();
 
     // Verify product page shows the product title
     expect(find.text('Signature Hoodie'), findsWidgets);
 
-    // Tap Add to Cart
-    final addButton = find.text('Add to Cart');
-    expect(addButton, findsOneWidget);
-    await tester.tap(addButton);
+  // Tap Add to Cart (use Key)
+  final addButton = find.byKey(const Key('add-to-cart'));
+  expect(addButton, findsOneWidget);
+  await tester.tap(addButton);
     await tester.pumpAndSettle();
 
     // Open cart via header icon (tooltip 'Cart')

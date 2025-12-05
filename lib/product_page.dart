@@ -242,7 +242,7 @@ class _ProductPageState extends State<ProductPage> {
                         const SizedBox(height: 12),
                         Row(
                           children: [
-                            Tooltip(message: 'Add product to cart', child: ElevatedButton(onPressed: _addToCart, child: const Text('Add to Cart'))),
+                            Tooltip(message: 'Add product to cart', child: ElevatedButton(key: const Key('add-to-cart'), onPressed: _addToCart, child: const Text('Add to Cart'))),
                             const SizedBox(width: 12),
                             Tooltip(message: 'Buy now (placeholder)', child: ElevatedButton(onPressed: placeholderCallbackForButtons, style: ElevatedButton.styleFrom(backgroundColor: Colors.grey), child: const Text('Buy Now'))),
                           ],
