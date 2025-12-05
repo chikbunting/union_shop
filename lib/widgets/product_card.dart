@@ -67,9 +67,10 @@ class _ProductCardState extends State<ProductCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                   // image area with overlay title and price
-                  AspectRatio(
-                    aspectRatio: 1,
-                    child: Stack(
+                  Expanded(
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Stack(
                       children: [
                         Positioned.fill(
                           child: widget.imageUrl.startsWith('assets/')
@@ -141,10 +142,11 @@ class _ProductCardState extends State<ProductCard> {
                           ),
                         ),
                       ],
-                    ),
-                  ),
+                    ), // end Stack
+                  ), // end AspectRatio
+                ), // end Expanded
                   // small padding area to keep card balanced
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
                 ],
               );
             }), // end LayoutBuilder
