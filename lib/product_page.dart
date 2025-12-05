@@ -102,6 +102,7 @@ class _ProductPageState extends State<ProductPage> {
                                 ? Image.asset(
                                     product.imageUrl,
                                     fit: BoxFit.cover,
+                                    semanticLabel: product.title,
                                     errorBuilder: (context, error, stackTrace) {
                                       return Container(
                                         color: Colors.grey[300],
@@ -123,12 +124,15 @@ class _ProductPageState extends State<ProductPage> {
                         const SizedBox(height: 24),
 
                         // Product name
-                        Text(
-                          product.title,
-                          style: const TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                        Semantics(
+                          header: true,
+                          child: Text(
+                            product.title,
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
 
@@ -175,28 +179,34 @@ class _ProductPageState extends State<ProductPage> {
                         Row(
                           children: [
                             Expanded(
-                              child: DropdownButtonFormField<String>(
-                                value: _selectedSize,
-                                items: const [
-                                  DropdownMenuItem(value: 'One Size', child: Text('One Size')),
-                                  DropdownMenuItem(value: 'Small', child: Text('Small')),
-                                  DropdownMenuItem(value: 'Medium', child: Text('Medium')),
-                                  DropdownMenuItem(value: 'Large', child: Text('Large')),
-                                ],
-                                onChanged: (v) => setState(() => _selectedSize = v ?? 'One Size'),
-                                decoration: const InputDecoration(labelText: 'Size'),
+                              child: Semantics(
+                                label: 'Size selection. Current: $_selectedSize',
+                                child: DropdownButtonFormField<String>(
+                                  value: _selectedSize,
+                                  items: const [
+                                    DropdownMenuItem(value: 'One Size', child: Text('One Size')),
+                                    DropdownMenuItem(value: 'Small', child: Text('Small')),
+                                    DropdownMenuItem(value: 'Medium', child: Text('Medium')),
+                                    DropdownMenuItem(value: 'Large', child: Text('Large')),
+                                  ],
+                                  onChanged: (v) => setState(() => _selectedSize = v ?? 'One Size'),
+                                  decoration: const InputDecoration(labelText: 'Size'),
+                                ),
                               ),
                             ),
                             const SizedBox(width: 12),
                             Expanded(
-                              child: DropdownButtonFormField<String>(
-                                value: _selectedColour,
-                                items: const [
-                                  DropdownMenuItem(value: 'Black', child: Text('Black')),
-                                  DropdownMenuItem(value: 'White', child: Text('White')),
-                                ],
-                                onChanged: (v) => setState(() => _selectedColour = v ?? 'Black'),
-                                decoration: const InputDecoration(labelText: 'Colour'),
+                              child: Semantics(
+                                label: 'Colour selection. Current: $_selectedColour',
+                                child: DropdownButtonFormField<String>(
+                                  value: _selectedColour,
+                                  items: const [
+                                    DropdownMenuItem(value: 'Black', child: Text('Black')),
+                                    DropdownMenuItem(value: 'White', child: Text('White')),
+                                  ],
+                                  onChanged: (v) => setState(() => _selectedColour = v ?? 'Black'),
+                                  decoration: const InputDecoration(labelText: 'Colour'),
+                                ),
                               ),
                             ),
                           ],
@@ -211,13 +221,15 @@ class _ProductPageState extends State<ProductPage> {
                                 children: [
                                   IconButton(
                                     icon: const Icon(Icons.remove),
+                                    tooltip: 'Decrease quantity',
                                     onPressed: () => setState(() {
                                       if (_quantity > 1) _quantity -= 1;
                                     }),
                                   ),
-                                  Text('$_quantity'),
+                                  Semantics(label: 'Quantity: $_quantity', child: Text('$_quantity')),
                                   IconButton(
                                     icon: const Icon(Icons.add),
+                                    tooltip: 'Increase quantity',
                                     onPressed: () => setState(() => _quantity += 1),
                                   ),
                                 ],
@@ -228,16 +240,9 @@ class _ProductPageState extends State<ProductPage> {
                         const SizedBox(height: 12),
                         Row(
                           children: [
-                            ElevatedButton(
-                              onPressed: _addToCart,
-                              child: const Text('Add to Cart'),
-                            ),
+                            Tooltip(message: 'Add product to cart', child: ElevatedButton(onPressed: _addToCart, child: const Text('Add to Cart'))),
                             const SizedBox(width: 12),
-                            ElevatedButton(
-                              onPressed: placeholderCallbackForButtons,
-                              style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-                              child: const Text('Buy Now'),
-                            ),
+                            Tooltip(message: 'Buy now (placeholder)', child: ElevatedButton(onPressed: placeholderCallbackForButtons, style: ElevatedButton.styleFrom(backgroundColor: Colors.grey), child: const Text('Buy Now'))),
                           ],
                         ),
                         const SizedBox(height: 16),

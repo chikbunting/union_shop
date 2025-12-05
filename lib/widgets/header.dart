@@ -26,7 +26,7 @@ class Header extends StatelessWidget {
           ),
           // Main header row
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             child: Row(
               children: [
                 Semantics(
@@ -38,23 +38,23 @@ class Header extends StatelessWidget {
                       children: [
                         Image.network(
                           'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                          height: 42,
-                          width: 42,
+                          height: 48,
+                          width: 48,
                           fit: BoxFit.cover,
                           semanticLabel: 'Union Shop logo',
                           errorBuilder: (context, error, stackTrace) {
                             return Container(
                               color: Colors.grey[300],
-                              width: 42,
-                              height: 42,
+                              width: 48,
+                              height: 48,
                               child: const Center(
                                 child: Icon(Icons.image_not_supported, color: Colors.grey),
                               ),
                             );
                           },
                         ),
-                        const SizedBox(width: 12),
-                        const Text('Union Shop', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        const SizedBox(width: 14),
+                        const Text('Union Shop', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),
@@ -66,13 +66,13 @@ class Header extends StatelessWidget {
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width > 800 ? 500 : 0),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Tooltip(message: 'Shop', child: TextButton(onPressed: navigateToCollections, child: const Text('Shop'))),
-                      Tooltip(message: 'Sale items', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/sale'), child: const Text('Sale'))),
-                      Tooltip(message: 'Personalisation', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/personalisation'), child: const Text('Personalisation'))),
-                      Tooltip(message: 'About', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/about'), child: const Text('About'))),
-                    ],
+                          mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Tooltip(message: 'Shop', child: TextButton(onPressed: navigateToCollections, child: const Text('Shop', style: TextStyle(fontSize: 16)))),
+                          Tooltip(message: 'Sale items', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/sale'), child: const Text('Sale', style: TextStyle(fontSize: 16)))),
+                          Tooltip(message: 'Personalisation', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/personalisation'), child: const Text('Personalisation', style: TextStyle(fontSize: 16)))),
+                          Tooltip(message: 'About', child: TextButton(onPressed: () => Navigator.pushNamed(context, '/about'), child: const Text('About', style: TextStyle(fontSize: 16)))),
+                        ],
                   ),
                 ),
 
