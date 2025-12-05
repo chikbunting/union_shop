@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/services/product_service.dart';
 import 'package:union_shop/widgets/product_card.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/widgets/app_drawer.dart';
 
 class CollectionPage extends StatefulWidget {
   final String collectionName;
@@ -54,6 +55,7 @@ class _CollectionPageState extends State<CollectionPage> {
     final products = filteredProducts();
 
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(
         title: Text(widget.collectionName),
         backgroundColor: const Color(0xFF4d2963),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/collection_page.dart';
 import 'package:union_shop/services/product_service.dart';
+import 'package:union_shop/widgets/app_drawer.dart';
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
@@ -14,6 +15,7 @@ class CollectionsPage extends StatelessWidget {
         title: const Text('Collections'),
         backgroundColor: const Color(0xFF4d2963),
       ),
+      drawer: const AppDrawer(),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: collections.length,

@@ -27,6 +27,7 @@ class _AuthPageState extends State<AuthPage> {
     if (ok) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Signed in')));
       Navigator.pushNamedAndRemoveUntil(context, '/account', (r) => false);
+    import 'package:union_shop/widgets/app_drawer.dart';
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sign in failed')));
     }
@@ -73,6 +74,7 @@ class _AuthPageState extends State<AuthPage> {
               onPressed: _loading
                   ? null
                   : () async {
+          drawer: const AppDrawer(),
                       setState(() => _loading = true);
                       final ok = await AuthService.instance.signInWithGoogle();
                       if (!mounted) return;

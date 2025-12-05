@@ -70,35 +70,16 @@ class Header extends StatelessWidget {
                   ),
                 ),
 
-                // On very small screens show a compact hamburger menu instead of center nav
+                // On very small screens show a hamburger that opens the Scaffold drawer
                 const SizedBox(width: 8),
                 if (w <= 700)
-                  PopupMenuButton<int>(
-                    icon: const Icon(Icons.menu, color: Colors.grey),
-                    tooltip: 'Menu',
-                    onSelected: (value) {
-                      switch (value) {
-                        case 0:
-                          navigateToCollections();
-                          break;
-                        case 1:
-                          Navigator.pushNamed(context, '/sale');
-                          break;
-                        case 2:
-                          Navigator.pushNamed(context, '/personalisation');
-                          break;
-                        case 3:
-                          Navigator.pushNamed(context, '/about');
-                          break;
-                      }
-                    },
-                    itemBuilder: (ctx) => const [
-                      PopupMenuItem(value: 0, child: Text('Shop')),
-                      PopupMenuItem(value: 1, child: Text('Sale')),
-                      PopupMenuItem(value: 2, child: Text('Personalisation')),
-                      PopupMenuItem(value: 3, child: Text('About')),
-                    ],
-                  ),
+                  Builder(builder: (ctx) {
+                    return IconButton(
+                      icon: const Icon(Icons.menu, color: Colors.grey),
+                      tooltip: 'Menu',
+                      onPressed: () => Scaffold.of(ctx).openDrawer(),
+                    );
+                  }),
                 const Spacer(),
 
                 // Center nav links (hidden on very small widths)

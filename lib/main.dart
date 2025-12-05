@@ -8,6 +8,7 @@ import 'package:union_shop/cart_page.dart';
 import 'package:union_shop/search_page.dart';
 import 'package:union_shop/personalisation_page.dart';
 import 'package:union_shop/widgets/header.dart';
+import 'package:union_shop/widgets/app_drawer.dart';
 import 'package:union_shop/account_page.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/widgets/product_card.dart';
@@ -75,6 +76,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
