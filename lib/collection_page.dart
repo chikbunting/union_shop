@@ -101,9 +101,9 @@ class _CollectionPageState extends State<CollectionPage> {
             Wrap(
               spacing: 8,
               children: [
-                FilterChip(label: const Text('Under £10'), selected: _under10, onSelected: (v) => setState(() => _under10 = v)),
-                FilterChip(label: const Text('Sale'), selected: _sale, onSelected: (v) => setState(() => _sale = v)),
-                FilterChip(label: const Text('Eco'), selected: _eco, onSelected: (v) => setState(() => _eco = v)),
+                Tooltip(message: 'Show products under £10', child: FilterChip(label: const Text('Under £10'), selected: _under10, onSelected: (v) => setState(() => _under10 = v))),
+                Tooltip(message: 'Show sale items', child: FilterChip(label: const Text('Sale'), selected: _sale, onSelected: (v) => setState(() => _sale = v))),
+                Tooltip(message: 'Show eco-friendly items', child: FilterChip(label: const Text('Eco'), selected: _eco, onSelected: (v) => setState(() => _eco = v))),
               ],
             ),
             const SizedBox(height: 12),

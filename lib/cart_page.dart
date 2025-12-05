@@ -55,29 +55,38 @@ class _CartPageState extends State<CartPage> {
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove_circle_outline),
-                                onPressed: () {
-                                  final newQty = it.quantity - 1;
-                                  CartService.instance.updateQuantity(key, newQty);
-                                  setState(() {});
-                                },
+                              Tooltip(
+                                message: 'Decrease quantity',
+                                child: IconButton(
+                                  icon: const Icon(Icons.remove_circle_outline),
+                                  onPressed: () {
+                                    final newQty = it.quantity - 1;
+                                    CartService.instance.updateQuantity(key, newQty);
+                                    setState(() {});
+                                  },
+                                ),
                               ),
-                              Text('${it.quantity}'),
-                              IconButton(
-                                icon: const Icon(Icons.add_circle_outline),
-                                onPressed: () {
-                                  final newQty = it.quantity + 1;
-                                  CartService.instance.updateQuantity(key, newQty);
-                                  setState(() {});
-                                },
+                              Semantics(label: 'Quantity ${it.quantity}', child: Text('${it.quantity}')),
+                              Tooltip(
+                                message: 'Increase quantity',
+                                child: IconButton(
+                                  icon: const Icon(Icons.add_circle_outline),
+                                  onPressed: () {
+                                    final newQty = it.quantity + 1;
+                                    CartService.instance.updateQuantity(key, newQty);
+                                    setState(() {});
+                                  },
+                                ),
                               ),
-                              IconButton(
-                                icon: const Icon(Icons.delete_outline),
-                                onPressed: () {
-                                  CartService.instance.remove(key);
-                                  setState(() {});
-                                },
+                              Tooltip(
+                                message: 'Remove item',
+                                child: IconButton(
+                                  icon: const Icon(Icons.delete_outline),
+                                  onPressed: () {
+                                    CartService.instance.remove(key);
+                                    setState(() {});
+                                  },
+                                ),
                               ),
                             ],
                           ),
