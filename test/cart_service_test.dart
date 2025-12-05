@@ -14,7 +14,7 @@ void main() {
   });
 
   test('adding products updates totalItems and totalPrice', () async {
-    final p = Product(
+    const p = Product(
       id: 'p-test-1',
       title: 'Test Product',
       price: '£10.00',
@@ -36,7 +36,7 @@ void main() {
   });
 
   test('updateQuantity removes item when set to zero', () async {
-    final p = Product(
+    const p = Product(
       id: 'p-test-2',
       title: 'Another Product',
       price: '£5.00',

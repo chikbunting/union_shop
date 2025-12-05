@@ -13,7 +13,7 @@ class AppDrawer extends StatelessWidget {
             const DrawerHeader(
               decoration: BoxDecoration(color: Color(0xFF4d2963)),
               child: Row(
-                children: const [
+                children: [
                   FlutterLogo(size: 40),
                   SizedBox(width: 12),
                   Text('Union Shop', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),

@@ -49,11 +49,12 @@ class _AccountPageState extends State<AccountPage> {
                     onPressed: () async {
                       final ok = await AuthService.instance.updateProfile(name: _nameCtrl.text.trim(), email: _emailCtrl.text.trim());
                       if (!mounted) return;
+                      final messenger = ScaffoldMessenger.of(context);
                       if (ok) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Profile updated')));
+                        messenger.showSnackBar(const SnackBar(content: Text('Profile updated')));
                         setState(() {});
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Email already in use')));
+                        messenger.showSnackBar(const SnackBar(content: Text('Email already in use')));
                       }
                     },
                     child: const Text('Update profile'),
@@ -69,12 +70,13 @@ class _AccountPageState extends State<AccountPage> {
                     onPressed: () async {
                       final ok = await AuthService.instance.changePassword(oldPassword: _oldPassCtrl.text, newPassword: _newPassCtrl.text);
                       if (!mounted) return;
+                      final messenger = ScaffoldMessenger.of(context);
                       if (ok) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Password changed')));
+                        messenger.showSnackBar(const SnackBar(content: Text('Password changed')));
                         _oldPassCtrl.clear();
                         _newPassCtrl.clear();
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Password change failed')));
+                        messenger.showSnackBar(const SnackBar(content: Text('Password change failed')));
                       }
                     },
                     child: const Text('Change password'),
@@ -85,7 +87,8 @@ class _AccountPageState extends State<AccountPage> {
                       onPressed: () async {
                         await AuthService.instance.signOut();
                         if (!mounted) return;
-                        Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
+                        final navigator = Navigator.of(context);
+                        navigator.pushNamedAndRemoveUntil('/', (r) => false);
                       },
                       child: const Text('Sign out')),
                 ],
