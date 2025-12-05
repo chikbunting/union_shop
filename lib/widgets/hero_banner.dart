@@ -30,7 +30,7 @@ class HeroBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
-                  'Placeholder Hero Title',
+                  'welcome to the union shop',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -40,7 +40,7 @@ class HeroBanner extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  "welcome to our shop! Discover unique products and exclusive deals just for you.",
+                  "where student life begins",
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,

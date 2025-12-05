@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/services/product_service.dart';
-import 'package:union_shop/models/product.dart';
+import 'package:union_shop/widgets/product_card.dart';
+import 'package:union_shop/widgets/footer.dart';
 
 class SalePage extends StatelessWidget {
   const SalePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Show selected sale products (p1 and p5) with images, plus legacy static sale items
-    final p1 = ProductService.instance.getProductById('p1');
-    final p5 = ProductService.instance.getProductById('p5');
+    // Featured sale product ids
+    final saleProductIds = ['p1', 'p5'];
 
-    final List<dynamic> saleEntries = [];
-    if (p1 != null) saleEntries.add(p1);
-    if (p5 != null) saleEntries.add(p5);
-    saleEntries.addAll([
+    // legacy simple sale list (kept for tests / simple display)
+    final saleProducts = const [
       {'title': 'Sale Magnet', 'price': '£5.00', 'old': '£10.00'},
       {'title': 'Discounted Postcard', 'price': '£2.50', 'old': '£5.00'},
       {'title': 'Sale Sticker', 'price': '£1.00', 'old': '£2.00'},
-    ]);
+    ];
+    final additionalSaleProducts = [
+      {'title': 'Hoodie', 'price': '£10.00', 'old': '£40.00'},
+      {'title': 'T-Shirt', 'price': '£5.00', 'old': '£20.00'},
+      
+      
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -36,34 +39,52 @@ class SalePage extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
+            // Sale product cards + legacy sale list below
             Expanded(
-              child: ListView.separated(
-                itemCount: saleEntries.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 8),
-                itemBuilder: (context, index) {
-                  final entry = saleEntries[index];
-                  if (entry is Product) {
-                    return ListTile(
-                      leading: Image.asset(
-                        entry.imageUrl,
-                        width: 72,
-                        height: 72,
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => const Icon(Icons.image_not_supported),
-                      ),
-                      title: Text(entry.title),
-                      subtitle: Text(entry.description),
-                      trailing: Text(entry.price),
-                    );
-                  } else {
-                    final Map m = entry as Map;
-                    return ListTile(
-                      title: Text(m['title'] ?? ''),
-                      subtitle: Text('Was ${m['old'] ?? ''}'),
-                      trailing: Text(m['price'] ?? ''),
-                    );
-                  }
-                },
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    GridView.count(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount: MediaQuery.of(context).size.width > 800 ? 2 : 1,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      childAspectRatio: 0.85,
+                      children: () {
+                        final products = saleProductIds
+                            .map((id) => ProductService.instance.getProductById(id))
+                            .where((p) => p != null)
+                            .map((p) => p!)
+                            .toList();
+                        return products
+                            .map((p) => ProductCard(
+                                  productId: p.id,
+                                  title: p.title,
+                                  price: p.price,
+                                  imageUrl: p.imageUrl,
+                                ))
+                            .toList();
+                      }(),
+                    ),
+                    const SizedBox(height: 16),
+                    // legacy sale list for smaller items
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: saleProducts.length,
+                      separatorBuilder: (_, __) => const SizedBox(height: 8),
+                      itemBuilder: (context, index) {
+                        final p = saleProducts[index];
+                        return ListTile(
+                          title: Text(p['title'] ?? ''),
+                          subtitle: Text('Was ${p['old']}'),
+                          trailing: Text(p['price'] ?? ''),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
